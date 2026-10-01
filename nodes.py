@@ -65,6 +65,51 @@ class ImageSaveWithMetadata:
         }
 
 
+class ModelNames:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model_directory": (sorted(folder_paths.folder_names_and_paths),),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("model_names",)
+    OUTPUT_IS_LIST = (True,)
+    FUNCTION = "get_model_names"
+    CATEGORY = "HaoVA | Model"
+
+    def get_model_names(self, model_directory):
+        return (folder_paths.get_filename_list(model_directory),)
+
+
+class GetPath:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model": ("MODEL",),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("path",)
+    FUNCTION = "get_path"
+    CATEGORY = "HaoVA | Model"
+
+    def get_path(self, model):
+        source_path = model.cached_patcher_init[1][0]
+        for model_directory, (paths, _) in folder_paths.folder_names_and_paths.items():
+            for path in paths:
+                if folder_paths.is_within_directory(path, source_path):
+                    return (os.path.join(model_directory, os.path.relpath(source_path, path)),)
+
+        return ("",)
+
+
 NODE_CLASS_MAPPINGS = {
-    "Save Image with Metadata": ImageSaveWithMetadata
+    "Save Image with Metadata": ImageSaveWithMetadata,
+    "Model Names": ModelNames,
+    "Get Path": GetPath,
 }
