@@ -1,9 +1,24 @@
 import os
 import json
 import numpy as np
+import hashlib
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
+import comfy.samplers
 import folder_paths
+
+def calc_sha256(file_path):
+    sha256_hash = hashlib.sha256()
+
+    with open(file_path, "rb") as f:
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+
+    return sha256_hash.hexdigest()
+
+
+def handle_whitespace(text):
+    return text.strip().replace("\n", " ").replace("\r", " ").replace("\t", " ")
 
 class ImageSaveWithMetadata:
     def __init__(self):
@@ -17,6 +32,14 @@ class ImageSaveWithMetadata:
                 "filename_prefix": ("STRING", {"default": "test"}),
             },
             "optional": {
+                "positive": ("STRING", {"default": "", "multiline": True}),
+                "negative": ("STRING", {"default": "", "multiline": True}),
+                "steps": ("INT", {"default": 20, "min": 1, "max": 10000}),
+                "sampler_name": (comfy.samplers.KSampler.SAMPLERS,),
+                "scheduler": (comfy.samplers.KSampler.SCHEDULERS,),
+                "cfg": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 100.0, "step": 0.1}),
+                "seed_value": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "model": ("MODEL",),
             },
             "hidden": {
                 "prompt": "PROMPT",
@@ -29,12 +52,41 @@ class ImageSaveWithMetadata:
     OUTPUT_NODE = True
     CATEGORY = "HaoVA | Image"
 
-    def save_images(self, images, filename_prefix="test", prompt=None, extra_pnginfo=None):
+    def save_images(
+        self,
+        images,
+        filename_prefix="test",
+        positive="",
+        negative="",
+        steps=20,
+        sampler_name="euler",
+        scheduler="normal",
+        cfg=8.0,
+        seed_value=0,
+        model=None,
+        prompt=None,
+        extra_pnginfo=None,
+    ):
         output_path, filename, counter, subfolder, filename_prefix = folder_paths.get_save_image_path(
             filename_prefix, self.output_dir, images[0].shape[1], images[0].shape[0]
         )
         results = []
-        comment = f"Version: ComfyUI"
+        width = images[0].shape[1]
+        height = images[0].shape[0]
+        modelhash = "unknown"
+        basemodelname = "unknown"
+        if model is not None:
+            model_path = model.cached_patcher_init[1][0]
+            modelhash = calc_sha256(model_path)[:10]
+            basemodelname = os.path.splitext(os.path.basename(model_path))[0]
+
+        comment = (
+            f"{handle_whitespace(positive)}\n"
+            f"Negative prompt: {handle_whitespace(negative)}\n"
+            f"Steps: {steps}, Sampler: {sampler_name}{f'_{scheduler}' if scheduler != 'normal' else ''}, "
+            f"CFG Scale: {cfg}, Seed: {seed_value}, Size: {width}x{height}, "
+            f"Model hash: {modelhash}, Model: {basemodelname}, Version: ComfyUI"
+        )
 
         for batch_number, image in enumerate(images):
             i = 255. * image.cpu().numpy()
