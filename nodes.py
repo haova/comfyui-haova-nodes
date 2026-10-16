@@ -1,6 +1,8 @@
 import os
+import re
 import json
 import logging
+import random
 import numpy as np
 import hashlib
 import urllib.error
@@ -76,6 +78,11 @@ CIVITAI_SAMPLERS = {
     "uni_pc": "UniPC",
     "uni_pc_bh2": "UniPC",
 }
+
+
+COMFY_SAMPLERS = {}
+for comfy_name, civitai_name in CIVITAI_SAMPLERS.items():
+    COMFY_SAMPLERS.setdefault(civitai_name, comfy_name)
 
 
 def parse_model_line(line):
@@ -347,11 +354,76 @@ class SchedulerSelect:
         return (scheduler,)
 
 
+class LoadImageMetadata:
+    @classmethod
+    def INPUT_TYPES(cls):
+        input_dir = folder_paths.get_input_directory()
+        files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
+        return {
+            "required": {
+                "image": (sorted(folder_paths.filter_files_content_types(files, ["image"])), {"image_upload": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "INT", comfy.samplers.KSampler.SAMPLERS, comfy.samplers.KSampler.SCHEDULERS, "FLOAT", "INT")
+    RETURN_NAMES = ("positive", "negative", "steps", "sampler_name", "scheduler", "cfg", "seed")
+    FUNCTION = "load_metadata"
+    CATEGORY = "HaoVA | Image"
+
+    @classmethod
+    def IS_CHANGED(cls, image):
+        return os.path.getmtime(folder_paths.get_annotated_filepath(image))
+
+    def load_metadata(self, image):
+        with Image.open(folder_paths.get_annotated_filepath(image)) as img:
+            parameters = img.info.get("parameters")
+        if parameters is None:
+            raise ValueError(f"{image} has no 'parameters' metadata")
+
+        lines = parameters.split("\n")
+        settings_index = max(i for i, line in enumerate(lines) if line.startswith("Steps: "))
+        text = "\n".join(lines[:settings_index])
+        positive, _, negative = text.partition("\nNegative prompt: ")
+        if positive.startswith("Negative prompt: "):
+            positive, negative = "", positive[len("Negative prompt: "):]
+        settings = dict(re.findall(r'\s*([\w ]+):\s*("(?:\\.|[^\\"])*"|[^,]*)(?:,|$)', lines[settings_index]))
+
+        sampler_name = settings.get("Sampler", "Euler")
+        scheduler = settings.get("Schedule type", "normal").lower()
+        if sampler_name.endswith(" Karras"):
+            sampler_name, scheduler = sampler_name[:-len(" Karras")], "karras"
+        sampler_name = COMFY_SAMPLERS.get(sampler_name, sampler_name)
+
+        return (positive, negative, int(settings.get("Steps", 20)), sampler_name, scheduler, float(settings.get("CFG scale", 8.0)), int(settings.get("Seed", 0)))
+
+
+class RandomPrompt:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "prompts": ("STRING", {"default": "", "multiline": True}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("prompt",)
+    FUNCTION = "pick"
+    CATEGORY = "HaoVA | Text"
+
+    def pick(self, prompts, seed):
+        lines = [line.strip() for line in prompts.splitlines() if line.strip()]
+        return (random.Random(seed).choice(lines) if lines else "",)
+
+
 NODE_CLASS_MAPPINGS = {
     "Save Image with Metadata": ImageSaveWithMetadata,
     "Model Names": ModelNames,
     "Get Path": GetPath,
     "Model Info": ModelInfo,
+    "Load Image Metadata": LoadImageMetadata,
     "Sampler Select": SamplerSelect,
     "Scheduler Select": SchedulerSelect,
+    "Random Prompt": RandomPrompt,
 }
