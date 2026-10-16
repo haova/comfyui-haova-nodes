@@ -8,6 +8,7 @@ import urllib.request
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 import comfy.samplers
+import nodes as comfy_nodes
 import folder_paths
 
 def load_model_info(file_path):
@@ -23,7 +24,7 @@ def load_model_info(file_path):
         info = {"mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "sha256": sha256}
     if "civitai" not in info:
         try:
-            request = urllib.request.Request(f"https://civitai.com/api/v1/model-versions/by-hash/{info['sha256']}", headers={"User-Agent": "haova-nodes"})
+            request = urllib.request.Request(f"https://civitai.com/api/v1/model-versions/by-hash/{info['sha256']}", headers={"User-Agent": "comfyui-haova-nodes"})
             with urllib.request.urlopen(request, timeout=15) as response:
                 version = json.load(response)
             info["civitai"] = {
@@ -52,6 +53,37 @@ def resolve_model_path(model_path):
         return folder_paths.get_full_path_or_raise(model_directory, relative_path)
 
     return model_path
+
+
+CIVITAI_SAMPLERS = {
+    "euler": "Euler",
+    "euler_ancestral": "Euler a",
+    "heun": "Heun",
+    "dpm_2": "DPM2",
+    "dpm_2_ancestral": "DPM2 a",
+    "lms": "LMS",
+    "dpm_fast": "DPM fast",
+    "dpm_adaptive": "DPM adaptive",
+    "dpmpp_2s_ancestral": "DPM++ 2S a",
+    "dpmpp_sde": "DPM++ SDE",
+    "dpmpp_sde_gpu": "DPM++ SDE",
+    "dpmpp_2m": "DPM++ 2M",
+    "dpmpp_2m_sde": "DPM++ 2M SDE",
+    "dpmpp_2m_sde_gpu": "DPM++ 2M SDE",
+    "dpmpp_3m_sde": "DPM++ 3M SDE",
+    "dpmpp_3m_sde_gpu": "DPM++ 3M SDE",
+    "ddim": "DDIM",
+    "uni_pc": "UniPC",
+    "uni_pc_bh2": "UniPC",
+}
+
+
+def parse_model_line(line):
+    path, _, weight = line.strip().rpartition(":")
+    if path and weight.replace(".", "", 1).lstrip("-").isdigit():
+        return resolve_model_path(path), float(weight)
+
+    return resolve_model_path(line), 1.0
 
 
 def handle_whitespace(text):
@@ -113,11 +145,8 @@ class ImageSaveWithMetadata:
         models = []
         for line in model_path.splitlines():
             if line.strip():
-                path, _, weight = line.strip().rpartition(":")
-                if not path or not weight.replace(".", "", 1).lstrip("-").isdigit():
-                    path, weight = line, "1"
-                path = resolve_model_path(path)
-                models.append((os.path.splitext(os.path.basename(path))[0], load_model_info(path), float(weight)))
+                path, weight = parse_model_line(line)
+                models.append((os.path.splitext(os.path.basename(path))[0], load_model_info(path), weight))
         modelhash = models[0][1]["sha256"][:10] if models else "unknown"
         basemodelname = models[0][0] if models else "unknown"
         hashes = {f"LORA:{name}": info["sha256"][:12].upper() for name, info, _ in models[1:]}
@@ -126,8 +155,9 @@ class ImageSaveWithMetadata:
         comment = (
             f"{handle_whitespace(positive)}\n"
             f"Negative prompt: {handle_whitespace(negative)}\n"
-            f"Steps: {steps}, Sampler: {sampler_name}{f'_{scheduler}' if scheduler != 'normal' else ''}, "
-            f"CFG Scale: {cfg}, Seed: {seed_value}, Size: {width}x{height}, "
+            f"Steps: {steps}, Sampler: {CIVITAI_SAMPLERS.get(sampler_name, sampler_name)}{' Karras' if scheduler == 'karras' else ''}, "
+            f"{f'Schedule type: {scheduler}, ' if scheduler not in ('normal', 'karras') else ''}"
+            f"CFG scale: {cfg}, Seed: {seed_value}, Size: {width}x{height}, "
             f"Model hash: {modelhash}, Model: {basemodelname}, "
             f"{f'Hashes: {json.dumps(hashes, separators=(",", ":"))}, ' if hashes else ''}"
             f"{f'Civitai resources: {json.dumps(resources, separators=(",", ":"))}, ' if resources else ''}Version: ComfyUI"
@@ -205,6 +235,25 @@ class GetPath:
     FUNCTION = "get_paths"
     CATEGORY = "HaoVA | Model"
 
+    def resolve(self, prompt, value):
+        if not isinstance(value, list):
+            return value
+        node = prompt[value[0]]
+        inputs = node["inputs"]
+        if node["class_type"] in ("PrimitiveString", "PrimitiveBoolean"):
+            return self.resolve(prompt, inputs["value"])
+        if node["class_type"] == "CustomCombo" and value[1] == 0:
+            return self.resolve(prompt, inputs["choice"])
+        if node["class_type"] == "StringCompare":
+            a = self.resolve(prompt, inputs["string_a"])
+            b = self.resolve(prompt, inputs["string_b"])
+            if a is None or b is None:
+                return None
+            if not self.resolve(prompt, inputs["case_sensitive"]):
+                a, b = a.lower(), b.lower()
+            mode = self.resolve(prompt, inputs["mode"])
+            return a.startswith(b) if mode == "Starts With" else a.endswith(b) if mode == "Ends With" else a == b
+
     def get_paths(self, model, prompt, unique_id):
         paths = []
         visited = set()
@@ -214,9 +263,15 @@ class GetPath:
                 return
             visited.add(node_id)
             inputs = prompt[node_id]["inputs"]
-            for value in inputs.values():
-                if isinstance(value, list):
-                    walk(value[0])
+            if prompt[node_id]["class_type"] == "ComfySwitchNode":
+                switch = self.resolve(prompt, inputs["switch"])
+                model_inputs = ["on_true"] if switch is True else ["on_false"] if switch is False else ["on_true", "on_false"]
+            else:
+                input_types = comfy_nodes.NODE_CLASS_MAPPINGS[prompt[node_id]["class_type"]].INPUT_TYPES()
+                model_inputs = [name for section in ("required", "optional") for name, spec in input_types.get(section, {}).items() if spec[0] == "MODEL"]
+            for name in model_inputs:
+                if isinstance(inputs.get(name), list):
+                    walk(inputs[name][0])
             for name, directory in self.FILE_INPUT_DIRECTORIES.items():
                 if isinstance(inputs.get(name), str):
                     weight = inputs.get("strength_model") if name == "lora_name" else None
@@ -226,8 +281,77 @@ class GetPath:
         return ("\n".join(paths),)
 
 
+class ModelInfo:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model_path": ("STRING", {"default": "", "multiline": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("markdown",)
+    FUNCTION = "get_info"
+    CATEGORY = "HaoVA | Model"
+
+    def get_info(self, model_path):
+        rows = ["| Model | Type | Weight |", "|---|---|---|"]
+        for line in model_path.splitlines():
+            if line.strip():
+                path, weight = parse_model_line(line)
+                if weight == 0:
+                    continue
+                civitai = load_model_info(path).get("civitai")
+                if civitai:
+                    rows.append(f"| [{civitai['modelName']}](https://civitai.com/model-versions/{civitai['modelVersionId']}) | {civitai['type']} | {weight if civitai['type'] == 'lora' else ''} |")
+                else:
+                    rows.append(f"| {os.path.basename(path)} | not found | |")
+
+        return ("\n".join(rows),)
+
+
+class SamplerSelect:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "sampler_name": (comfy.samplers.KSampler.SAMPLERS,),
+            },
+        }
+
+    RETURN_TYPES = (comfy.samplers.KSampler.SAMPLERS,)
+    RETURN_NAMES = ("sampler_name",)
+    FUNCTION = "select"
+    CATEGORY = "HaoVA | Sampling"
+
+    def select(self, sampler_name):
+        return (sampler_name,)
+
+
+class SchedulerSelect:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "scheduler": (comfy.samplers.KSampler.SCHEDULERS,),
+            },
+        }
+
+    RETURN_TYPES = (comfy.samplers.KSampler.SCHEDULERS,)
+    RETURN_NAMES = ("scheduler",)
+    FUNCTION = "select"
+    CATEGORY = "HaoVA | Sampling"
+
+    def select(self, scheduler):
+        return (scheduler,)
+
+
 NODE_CLASS_MAPPINGS = {
     "Save Image with Metadata": ImageSaveWithMetadata,
     "Model Names": ModelNames,
     "Get Path": GetPath,
+    "Model Info": ModelInfo,
+    "Sampler Select": SamplerSelect,
+    "Scheduler Select": SchedulerSelect,
 }
