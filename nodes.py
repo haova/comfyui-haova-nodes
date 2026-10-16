@@ -354,14 +354,56 @@ class SchedulerSelect:
         return (scheduler,)
 
 
+SETTING_KEY = re.compile(r"\s*([\w ]+):\s*")
+SETTING_VALUE = re.compile(r'"(?:\\.|[^\\"])*"|[^,]*')
+
+
+def list_input_images():
+    input_dir = folder_paths.get_input_directory()
+    files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
+
+    return sorted(folder_paths.filter_files_content_types(files, ["image"]))
+
+
+def parse_settings(line):
+    settings = {}
+    position = 0
+    while match := SETTING_KEY.match(line, position):
+        position = match.end()
+        if line.startswith(("[", "{"), position):
+            value, position = json.JSONDecoder().raw_decode(line, position)
+        else:
+            value_match = SETTING_VALUE.match(line, position)
+            value, position = value_match.group(), value_match.end()
+        settings[match.group(1)] = value
+        if line.startswith(",", position):
+            position += 1
+
+    return settings
+
+
+def read_parameters(image):
+    with Image.open(folder_paths.get_annotated_filepath(image)) as img:
+        parameters = img.info.get("parameters")
+    if parameters is None:
+        raise ValueError(f"{image} has no 'parameters' metadata")
+
+    lines = parameters.split("\n")
+    settings_index = max(i for i, line in enumerate(lines) if line.startswith("Steps: "))
+    text = "\n".join(lines[:settings_index])
+    positive, _, negative = text.partition("\nNegative prompt: ")
+    if positive.startswith("Negative prompt: "):
+        positive, negative = "", positive[len("Negative prompt: "):]
+
+    return positive, negative, parse_settings(lines[settings_index])
+
+
 class LoadImageMetadata:
     @classmethod
     def INPUT_TYPES(cls):
-        input_dir = folder_paths.get_input_directory()
-        files = [f for f in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, f))]
         return {
             "required": {
-                "image": (sorted(folder_paths.filter_files_content_types(files, ["image"])), {"image_upload": True}),
+                "image": (list_input_images(), {"image_upload": True}),
             },
         }
 
@@ -375,19 +417,7 @@ class LoadImageMetadata:
         return os.path.getmtime(folder_paths.get_annotated_filepath(image))
 
     def load_metadata(self, image):
-        with Image.open(folder_paths.get_annotated_filepath(image)) as img:
-            parameters = img.info.get("parameters")
-        if parameters is None:
-            raise ValueError(f"{image} has no 'parameters' metadata")
-
-        lines = parameters.split("\n")
-        settings_index = max(i for i, line in enumerate(lines) if line.startswith("Steps: "))
-        text = "\n".join(lines[:settings_index])
-        positive, _, negative = text.partition("\nNegative prompt: ")
-        if positive.startswith("Negative prompt: "):
-            positive, negative = "", positive[len("Negative prompt: "):]
-        settings = dict(re.findall(r'\s*([\w ]+):\s*("(?:\\.|[^\\"])*"|[^,]*)(?:,|$)', lines[settings_index]))
-
+        positive, negative, settings = read_parameters(image)
         sampler_name = settings.get("Sampler", "Euler")
         scheduler = settings.get("Schedule type", "normal").lower()
         if sampler_name.endswith(" Karras"):
@@ -397,13 +427,48 @@ class LoadImageMetadata:
         return (positive, negative, int(settings.get("Steps", 20)), sampler_name, scheduler, float(settings.get("CFG scale", 8.0)), int(settings.get("Seed", 0)))
 
 
+class ImageInfo:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "image": (list_input_images(), {"image_upload": True}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("markdown",)
+    FUNCTION = "get_info"
+    CATEGORY = "HaoVA | Image"
+
+    @classmethod
+    def IS_CHANGED(cls, image):
+        return os.path.getmtime(folder_paths.get_annotated_filepath(image))
+
+    def get_info(self, image):
+        positive, negative, settings = read_parameters(image)
+        resources = settings.pop("Civitai resources", [])
+        hashes = settings.pop("Hashes", {})
+        rows = ["| Setting | Value |", "|---|---|"]
+        for key, value in settings.items():
+            rows.append(f"| {key} | {value.replace('|', '&#124;')} |")
+        rows += [f"| {name} hash | {digest} |" for name, digest in hashes.items()]
+        parts = ["### Prompt", f"```\n{positive}\n```", "### Negative prompt", f"```\n{negative}\n```", "### Settings", "\n".join(rows)]
+        if resources:
+            rows = ["| Model | Type | Weight |", "|---|---|---|"]
+            rows += [f"| [{resource['modelName']}](https://civitai.com/model-versions/{resource['modelVersionId']}) | {resource['type']} | {resource.get('weight', '')} |" for resource in resources]
+            parts += ["### Resources", "\n".join(rows)]
+
+        return ("\n\n".join(parts),)
+
+
 class RandomPrompt:
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "prompts": ("STRING", {"default": "", "multiline": True}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "max_number": ("INT", {"default": 10, "min": 1}),
             },
         }
 
@@ -412,9 +477,25 @@ class RandomPrompt:
     FUNCTION = "pick"
     CATEGORY = "HaoVA | Text"
 
-    def pick(self, prompts, seed):
-        lines = [line.strip() for line in prompts.splitlines() if line.strip()]
-        return (random.Random(seed).choice(lines) if lines else "",)
+    def pick(self, seed, max_number):
+        data_directory = os.path.join(os.path.dirname(__file__), "data")
+        with open(os.path.join(data_directory, "words.json"), encoding="utf-8") as f:
+            words = json.load(f)
+        with open(os.path.join(data_directory, "templates.txt"), encoding="utf-8") as f:
+            entries = [line.rstrip("\n").split("\t", 1) for line in f]
+        entries = [(int(count), template) for count, template in entries if all(tag == "NUM" or tag in words for tag in re.findall(r"\{([A-Z]+)\d+\}", template))]
+        rng = random.Random(seed)
+        template = rng.choices([template for _, template in entries], weights=[count for count, _ in entries])[0]
+
+        numbers = range(1, max_number + 1)
+        number_weights = [1 / number for number in numbers]
+
+        def fill(match):
+            if match.group(1) == "NUM":
+                return str(rng.choices(numbers, weights=number_weights)[0])
+            return rng.choice(words[match.group(1)])
+
+        return (re.sub(r"\{([A-Z]+)\d+\}", fill, template),)
 
 
 NODE_CLASS_MAPPINGS = {
@@ -423,6 +504,7 @@ NODE_CLASS_MAPPINGS = {
     "Get Path": GetPath,
     "Model Info": ModelInfo,
     "Load Image Metadata": LoadImageMetadata,
+    "Image Info": ImageInfo,
     "Sampler Select": SamplerSelect,
     "Scheduler Select": SchedulerSelect,
     "Random Prompt": RandomPrompt,

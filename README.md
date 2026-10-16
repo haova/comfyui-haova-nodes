@@ -42,9 +42,13 @@ Pick a sampler or scheduler once and connect it to every `sampler_name` / `sched
 
 Reads the `parameters` metadata of an image and outputs the positive and negative prompt, steps, sampler, scheduler, CFG and seed. Works with images saved by **Save Image with Metadata** and other A1111-style PNGs.
 
+### Image Info (`HaoVA | Image`)
+
+Reads the `parameters` metadata of an image and outputs it as markdown: prompt, negative prompt, a settings table, the hashes, and the Civitai resources as links. Works with images saved by **Save Image with Metadata** and other A1111-style PNGs.
+
 ### Random Prompt (`HaoVA | Text`)
 
-Picks one non-empty line from `prompts` using `seed` and outputs it as `prompt`. The same seed always gives the same line.
+Builds a random prompt from `data/templates.txt`, picking a template weighted by how often it occurs and filling every slot with a random word from `data/words.json`. A `{NUM}` slot gets a number from 1 to `max_number`, where smaller numbers are more likely (weight 1/n). The same `seed` always gives the same prompt.
 
 ## Credits
 
