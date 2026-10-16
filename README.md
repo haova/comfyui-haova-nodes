@@ -37,3 +37,16 @@ Outputs the Civitai info of the models in `model_path` as a markdown table. Mode
 ### Sampler Select / Scheduler Select (`HaoVA | Sampling`)
 
 Pick a sampler or scheduler once and connect it to every `sampler_name` / `scheduler` input, such as the ones on **Save Image with Metadata** and KSampler.
+
+### Load Image Metadata (`HaoVA | Image`)
+
+Reads the `parameters` metadata of an image and outputs the positive and negative prompt, steps, sampler, scheduler, CFG and seed. Works with images saved by **Save Image with Metadata** and other A1111-style PNGs.
+
+### Random Prompt (`HaoVA | Text`)
+
+Picks one non-empty line from `prompts` using `seed` and outputs it as `prompt`. The same seed always gives the same line.
+
+## Credits
+
+- `data/templates.txt` is derived from the [UD English-EWT](https://github.com/UniversalDependencies/UD_English-EWT) treebank (Silveira et al., 2014), licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- `data/words.json` is derived from [Open English WordNet](https://en-word.net/) 2025, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), which is based on WordNet 3.1, Copyright 2011 Princeton University.
