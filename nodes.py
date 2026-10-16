@@ -1,20 +1,57 @@
 import os
 import json
+import logging
 import numpy as np
 import hashlib
+import urllib.error
+import urllib.request
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 import comfy.samplers
 import folder_paths
 
-def calc_sha256(file_path):
-    sha256_hash = hashlib.sha256()
+def load_model_info(file_path):
+    stat = os.stat(file_path)
+    info_path = os.path.splitext(file_path)[0] + ".haova.json"
+    info = {}
+    if os.path.exists(info_path):
+        with open(info_path) as f:
+            info = json.load(f)
+    if info.get("mtime_ns") != stat.st_mtime_ns or info.get("size") != stat.st_size:
+        with open(file_path, "rb") as f:
+            sha256 = hashlib.file_digest(f, "sha256").hexdigest()
+        info = {"mtime_ns": stat.st_mtime_ns, "size": stat.st_size, "sha256": sha256}
+    if "civitai" not in info:
+        try:
+            request = urllib.request.Request(f"https://civitai.com/api/v1/model-versions/by-hash/{info['sha256']}", headers={"User-Agent": "haova-nodes"})
+            with urllib.request.urlopen(request, timeout=15) as response:
+                version = json.load(response)
+            info["civitai"] = {
+                "modelVersionId": version["id"],
+                "modelName": version["model"]["name"],
+                "modelVersionName": version["name"],
+                "type": version["model"]["type"].lower(),
+            }
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                info["civitai"] = None
+            else:
+                logging.warning(f"Civitai lookup failed for {file_path}: {e}")
+        except urllib.error.URLError as e:
+            logging.warning(f"Civitai lookup failed for {file_path}: {e}")
+    with open(info_path, "w") as f:
+        json.dump(info, f)
 
-    with open(file_path, "rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
+    return info
 
-    return sha256_hash.hexdigest()
+
+def resolve_model_path(model_path):
+    model_path = model_path.strip()
+    model_directory, _, relative_path = model_path.partition("/")
+    if not os.path.isfile(model_path) and model_directory in folder_paths.folder_names_and_paths:
+        return folder_paths.get_full_path_or_raise(model_directory, relative_path)
+
+    return model_path
 
 
 def handle_whitespace(text):
@@ -34,12 +71,12 @@ class ImageSaveWithMetadata:
             "optional": {
                 "positive": ("STRING", {"default": "", "multiline": True}),
                 "negative": ("STRING", {"default": "", "multiline": True}),
+                "model_path": ("STRING", {"default": "", "multiline": True}),
+                "seed_value": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
                 "steps": ("INT", {"default": 20, "min": 1, "max": 10000}),
                 "sampler_name": (comfy.samplers.KSampler.SAMPLERS,),
                 "scheduler": (comfy.samplers.KSampler.SCHEDULERS,),
                 "cfg": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 100.0, "step": 0.1}),
-                "seed_value": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                "model": ("MODEL",),
             },
             "hidden": {
                 "prompt": "PROMPT",
@@ -58,12 +95,12 @@ class ImageSaveWithMetadata:
         filename_prefix="test",
         positive="",
         negative="",
+        model_path="",
+        seed_value=0,
         steps=20,
         sampler_name="euler",
         scheduler="normal",
         cfg=8.0,
-        seed_value=0,
-        model=None,
         prompt=None,
         extra_pnginfo=None,
     ):
@@ -73,19 +110,27 @@ class ImageSaveWithMetadata:
         results = []
         width = images[0].shape[1]
         height = images[0].shape[0]
-        modelhash = "unknown"
-        basemodelname = "unknown"
-        if model is not None:
-            model_path = model.cached_patcher_init[1][0]
-            modelhash = calc_sha256(model_path)[:10]
-            basemodelname = os.path.splitext(os.path.basename(model_path))[0]
+        models = []
+        for line in model_path.splitlines():
+            if line.strip():
+                path, _, weight = line.strip().rpartition(":")
+                if not path or not weight.replace(".", "", 1).lstrip("-").isdigit():
+                    path, weight = line, "1"
+                path = resolve_model_path(path)
+                models.append((os.path.splitext(os.path.basename(path))[0], load_model_info(path), float(weight)))
+        modelhash = models[0][1]["sha256"][:10] if models else "unknown"
+        basemodelname = models[0][0] if models else "unknown"
+        hashes = {f"LORA:{name}": info["sha256"][:12].upper() for name, info, _ in models[1:]}
+        resources = [{**info["civitai"], **({"weight": weight} if index else {})} for index, (_, info, weight) in enumerate(models) if info.get("civitai")]
 
         comment = (
             f"{handle_whitespace(positive)}\n"
             f"Negative prompt: {handle_whitespace(negative)}\n"
             f"Steps: {steps}, Sampler: {sampler_name}{f'_{scheduler}' if scheduler != 'normal' else ''}, "
             f"CFG Scale: {cfg}, Seed: {seed_value}, Size: {width}x{height}, "
-            f"Model hash: {modelhash}, Model: {basemodelname}, Version: ComfyUI"
+            f"Model hash: {modelhash}, Model: {basemodelname}, "
+            f"{f'Hashes: {json.dumps(hashes, separators=(",", ":"))}, ' if hashes else ''}"
+            f"{f'Civitai resources: {json.dumps(resources, separators=(",", ":"))}, ' if resources else ''}Version: ComfyUI"
         )
 
         for batch_number, image in enumerate(images):
@@ -137,27 +182,48 @@ class ModelNames:
 
 
 class GetPath:
+    FILE_INPUT_DIRECTORIES = {
+        "ckpt_name": "checkpoints",
+        "unet_name": "diffusion_models",
+        "lora_name": "loras",
+    }
+
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
                 "model": ("MODEL",),
             },
+            "hidden": {
+                "prompt": "PROMPT",
+                "unique_id": "UNIQUE_ID",
+            },
         }
 
     RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("path",)
-    FUNCTION = "get_path"
+    RETURN_NAMES = ("paths",)
+    FUNCTION = "get_paths"
     CATEGORY = "HaoVA | Model"
 
-    def get_path(self, model):
-        source_path = model.cached_patcher_init[1][0]
-        for model_directory, (paths, _) in folder_paths.folder_names_and_paths.items():
-            for path in paths:
-                if folder_paths.is_within_directory(path, source_path):
-                    return (os.path.join(model_directory, os.path.relpath(source_path, path)),)
+    def get_paths(self, model, prompt, unique_id):
+        paths = []
+        visited = set()
 
-        return ("",)
+        def walk(node_id):
+            if node_id in visited:
+                return
+            visited.add(node_id)
+            inputs = prompt[node_id]["inputs"]
+            for value in inputs.values():
+                if isinstance(value, list):
+                    walk(value[0])
+            for name, directory in self.FILE_INPUT_DIRECTORIES.items():
+                if isinstance(inputs.get(name), str):
+                    weight = inputs.get("strength_model") if name == "lora_name" else None
+                    paths.append(f"{directory}/{inputs[name]}" + (f":{weight}" if isinstance(weight, (int, float)) else ""))
+
+        walk(prompt[unique_id]["inputs"]["model"][0])
+        return ("\n".join(paths),)
 
 
 NODE_CLASS_MAPPINGS = {
