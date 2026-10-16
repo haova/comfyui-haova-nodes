@@ -1,0 +1,597 @@
+77	{ADJ1} {NOUN1}
+19	{NOUN1} {NOUN2}
+13	{VERB1} {NOUN1}
+10	{ADJ1} {NOUN1} {NOUN2}
+6	{VERB1} a {ADJ1} {NOUN1}
+5	{NUM1} {NOUN1}
+5	{VERB1} {ADV1}
+5	{NOUN1} {NUM1}
+5	{NOUN1} was {ADJ1}
+4	{VERB1} the {NOUN1}
+4	{NUM1} - {ADJ1}
+4	{VERB1} {ADJ1}
+3	{NOUN1} a {NOUN2}
+3	{NUM1} {NOUN1} {NOUN2}
+3	{NOUN1} for the {NOUN2}
+3	The {NOUN1} is {ADJ1}
+3	{ADJ1} about the {NOUN1}
+3	{NOUN1} will be {VERB1}
+3	{NOUN1} of {NOUN2}
+3	{ADJ1} {NOUN1} {ADV1}
+3	{ADJ1} {NOUN1} and {ADJ2} {NOUN2}
+3	{ADJ1}, {ADJ2} {NOUN1}
+3	{ADJ1} {ADJ2} {NOUN1}
+3	The {ADJ1} {NOUN1} {ADV1}
+3	{ADJ1} {NOUN1}, {ADJ2} {NOUN2}
+2	{VERB1} it {VERB2}
+2	In {ADJ1} {NOUN1}, its {NOUN2} has {VERB1} {ADJ2}
+2	{VERB1} up {ADJ1} {NOUN1} to {VERB2} {NOUN2} {NOUN3} {NOUN4}
+2	{VERB1} out the {NOUN1} of {NUM1}
+2	{NOUN1} for {VERB1}
+2	{VERB1} in {NOUN1}
+2	The {NOUN1} {NOUN2} for the {NOUN3} is {ADJ1}
+2	Any {NOUN1} {NOUN2} will be {VERB1} in {ADJ1}
+2	{VERB1} the {NOUN1} {NOUN2}
+2	{VERB1} {NOUN1} {NOUN2}
+2	{NOUN1} {NOUN2} {ADV1}
+2	{VERB1} is a {NOUN1} of the {NOUN2} {NOUN3} for the {NOUN4} 's {NOUN5}
+2	The {VERB1} in {NOUN1} is {NUM1}
+2	{NOUN1} is {NUM1}
+2	{VERB1} the {ADJ1} {NOUN1}
+2	{NUM1} {ADJ1} {NOUN1}
+2	{NOUN1} are {ADJ1}
+2	{NOUN1} {NOUN2}: {NUM1}
+2	{NOUN1} {VERB1} {ADV1}
+2	{NUM1}. {ADJ1} {NOUN1}
+2	{NOUN1} {VERB1} {ADJ1} {NOUN2}
+2	{VERB1} a {NOUN1} {NOUN2}
+2	{ADJ1} and {ADJ2}
+2	{ADJ1}, {ADJ2} and {ADJ3} {NOUN1}
+2	{ADJ1} {ADJ2} {ADJ3}
+2	{NOUN1} {NOUN2} {NOUN3}
+2	{VERB1} {ADV1} {ADV2}
+2	{ADJ1} {NOUN1} AND {NOUN2}
+2	{ADJ1} {NOUN1} for {ADJ2} {NOUN2}
+2	The {NOUN1} {VERB1}
+2	{ADJ1} for {NOUN1}
+1	The {ADJ1} was being {VERB1} by the {NOUN1} of an {NOUN2} {NOUN3}
+1	A {NOUN1} from the {NOUN2} {VERB1} to {VERB2} his {NOUN3} before he {VERB3}
+1	{NOUN1} are {ADV1} {ADJ1} on the {NOUN2} and they have {VERB1} {ADJ2} than {ADV2}
+1	The {NOUN1} was a {NOUN2} to {VERB1} {NOUN3}
+1	{ADJ1} and {ADJ2} {NOUN1} is {ADJ3} among {ADJ4} {ADJ5} {ADJ6} {ADJ7} {NOUN2} and {NOUN3}
+1	{VERB1} {ADV1} to {VERB2} the {NOUN1}
+1	{NUM1} {NOUN1} of {ADJ1} {NOUN2}
+1	{NUM1}-{NUM2} {NOUN1} of {NOUN2} {NOUN3}
+1	{NUM1}-{NUM2} {NOUN1} of {NOUN2}-{NOUN3} {NOUN4}
+1	{ADJ1} {NOUN1} {NOUN2} have {ADV1} been {ADV2} {VERB1} or {VERB2} in {ADJ2} {NOUN3}
+1	{ADJ1} {NOUN1}, {NOUN2} {VERB1} In {NOUN3} {NOUN4} {NOUN5} {NOUN6}
+1	The {ADV1} {VERB1} {NOUN1}, {VERB2} him {ADJ1} in the {NOUN2} {NOUN3}, were {VERB3}
+1	The {NOUN1} and {NOUN2} {VERB1} in all {NOUN3}
+1	{NOUN1} {NOUN2} can {VERB1} the {NOUN3} of the {NOUN4} to {VERB2} {ADJ1} {NOUN5} like {NOUN6}
+1	{NOUN1} and {NOUN2} {VERB1} the {NOUN3}
+1	The {NOUN1} is another {NOUN2}
+1	{NOUN1} ON {NOUN2} {NOUN3}
+1	{ADJ1} {ADV1} some {NOUN1} are {VERB1} {ADV2} by {ADV3}-{VERB2} {NOUN2}
+1	{NOUN1} {VERB1} {NOUN2} and {ADJ1} {NOUN3} at the {ADJ2} {NOUN4}
+1	{VERB1} up {NOUN1} {NOUN2} for {ADJ1} {NOUN3}
+1	{NOUN1} is {ADJ1}...{ADV1} {VERB1} {NOUN2}
+1	{ADJ1} {NOUN1} is {ADJ2} and {ADJ3}; {ADJ4} {NOUN2} is {ADJ5}, {ADJ6}, {ADJ7}, {ADJ8}
+1	{ADJ1} {NOUN1} is {ADJ2}; {ADJ3} {NOUN2} is {ADV1} {ADJ4}, {ADJ5}, {ADJ6}
+1	The {NOUN1} and {ADJ1} of their {NOUN2} {ADV1} {VERB1} they had {VERB2} {ADV2} {ADV3}
+1	The {ADJ1} {NOUN1} {NOUN2} was {VERB1} as a {NOUN3}
+1	{NUM1}{NOUN1} per {NOUN2}, {NUM2} {NOUN3} {VERB1} {NUM3} {NOUN4}, {ADJ1} for {NUM4} {NOUN5}
+1	{NUM1} {ADJ1} {NOUN1} {VERB1} {NOUN2} about the {ADJ2} {NOUN3} {NOUN4}
+1	{ADJ1} {ADJ2} {NOUN1}, but {ADV1} {VERB1} and {NOUN2}-{ADJ3}
+1	{ADJ1} {NOUN1} are {ADJ2} {NOUN2}
+1	{NOUN1} is, {NOUN2} and {NOUN3} and {ADJ1}-{ADJ2} {ADJ3} {NOUN4}, nothing {ADV1}
+1	{NOUN1} {NOUN2} {ADV1} {VERB1} nothing to {VERB2} with {NOUN3} and {NOUN4}
+1	{NOUN1} can be {ADJ1}
+1	{NOUN1} at {NOUN2} of {NOUN3} is an {VERB1} {NOUN4}
+1	{NOUN1} {VERB1} the {NOUN2} but {VERB2} her {ADJ1} {NOUN3} and the {NOUN4} {VERB3}
+1	In the {ADJ1} {NOUN1} are the {NOUN2} themselves
+1	The {NOUN1} {VERB1} their {NOUN2}, {NOUN3}, {NOUN4} and {ADJ1} {NOUN5} for {ADJ2} {ADJ3} {NOUN6}
+1	The {ADJ1} {VERB1} {NOUN1} is the {ADJ2} {NOUN2} {NOUN3}
+1	{ADJ1} {NOUN1} of a {ADJ2} {NOUN2} must {ADV1} {VERB1} {NOUN3}
+1	In the {ADJ1} {NOUN1}, {ADV1} {VERB1} and {VERB2}
+1	In the {ADJ1} {NOUN1}, {ADV1} {VERB1} the {ADJ2} {NOUN2} and {VERB2} it to the {NOUN3}
+1	The {ADJ1} {NOUN1} can and must be {VERB1} by {NOUN2}
+1	{ADJ1} {VERB1} to the {NUM1} {NOUN1} {NOUN2} as {ADJ2}
+1	{NOUN1} {NOUN2} are a {ADJ1} {NOUN3} of {NOUN4} because of the {NOUN5} of {ADJ2} {NOUN6}
+1	{ADJ1} {NOUN1} {VERB1} {ADV1} {ADJ2} {NOUN2}
+1	{NOUN1} for {VERB1} the {NOUN2} together
+1	{NOUN1} {NOUN2}: {NOUN3}
+1	{NOUN1} {NOUN2} {NOUN3}: {ADJ1}
+1	{NOUN1} {NOUN2} {NUM1}{NOUN3}
+1	{NOUN1} {NOUN2}: {NUM1}{NUM2}
+1	{ADJ1} as {NUM1}
+1	{VERB1}, of {NOUN1}
+1	{VERB1} the {NUM1} or {ADJ1} {NOUN1} {NOUN2}
+1	{VERB1} {ADV1} to {VERB2} a {ADJ1} {NOUN1}
+1	The {NOUN1} of her {NOUN2} {VERB1} like a {NOUN3} of {ADJ1} {NOUN4}
+1	{VERB1} him a {NOUN1} {NOUN2}
+1	{VERB1} {VERB2} {NOUN1} and {NOUN2} {NOUN3}
+1	{VERB1} to the {ADJ1} {NOUN1}-to-be
+1	{NOUN1} for the {NOUN2} on the {NOUN3}
+1	The {ADJ1} {NOUN1} {NOUN2} are {ADV1} {VERB1} {ADJ2}
+1	{VERB1} {VERB2} {NOUN1}
+1	Any {NOUN1}, {NOUN2} or {NOUN3} by {NOUN4} or {NOUN5} without {ADJ1} {NOUN6} is {ADV1} {VERB1}
+1	A {ADJ1} {NOUN1} of the {NOUN2} of {NOUN3} in {VERB1} {NOUN4} throughout the {NOUN5}
+1	The {NOUN1} was {ADJ1} and, in some {NOUN2}, {ADV1} {ADJ2}
+1	{VERB1} about a {NOUN1} {NOUN2}
+1	The {NOUN1} in the {NOUN2} is a {ADJ1} and {ADJ2} {NOUN3} from the {ADJ3} {NOUN4}
+1	The {NUM1} {NUM2} {VERB1} {ADJ1} {NOUN1}
+1	The {NOUN1} {NOUN2} {NOUN3} shall {VERB1} the {NOUN4} {VERB2} by the {NOUN5} via the {NOUN6}
+1	{NOUN1} {NOUN2} for {NOUN3} {NOUN4}, as {VERB1}
+1	{ADJ1} {NOUN1} {NOUN2}a {NOUN3}
+1	At any {NOUN1}, be {ADJ1} and be {ADJ2}
+1	{VERB1} ta {VERB2} for {ADV1}
+1	{VERB1} is the {VERB2} {NOUN1}
+1	{NOUN1} for the {NOUN2} {NOUN3}
+1	Some of the {NOUN1} {ADV1} would {VERB1} to {VERB2}
+1	An {NOUN1} will be {VERB1}, {ADV1} {ADV2} as {NUM1} is {ADJ1}
+1	{VERB1} {ADV1} to {VERB2} {NOUN1} of the {ADJ1} {NOUN2}
+1	{NOUN1} and {NOUN2}
+1	All the {ADJ1} and {ADJ2} {NOUN1}
+1	{ADJ1} of {NOUN1} and {ADV1} {ADV2} {VERB1} {ADV3} to {VERB2} {ADV4}
+1	All {NOUN1}, {NOUN2}, {NOUN3} are {VERB1}
+1	{NOUN1} a {NUM1}
+1	All the {ADJ1} {NOUN1} will be {VERB1} to {VERB2} their {NOUN2} {NOUN3}, which is {NUM1}
+1	The {NOUN1} of the {NOUN2} is {NUM1} {NOUN3}
+1	The {NOUN1} will {VERB1} once everyone has {VERB2} up
+1	{NOUN1} are {ADV1} {VERB1}
+1	In {NOUN1} the {VERB1} {NOUN2} {NOUN3} and {ADJ1} {NOUN4} {NOUN5} are behind {NOUN6}
+1	{NOUN1} of {NOUN2} {NOUN3} between {NOUN4} and {NOUN5} {NOUN6} {NOUN7} of {NOUN8} {ADJ1} {NOUN9}
+1	{NOUN1} {NOUN2} of {NOUN3} {NOUN4} {NOUN5} {VERB1} the {ADJ1} {ADV1} {VERB2} {NOUN6} {NOUN7}
+1	{ADJ1} {NOUN1} and {NOUN2} of {NOUN3} {NOUN4} {NOUN5} {NOUN6}
+1	A {ADJ1} {NOUN1} of {ADJ2} {NOUN2}
+1	A {ADJ1} {ADJ2} {NOUN1} of {NOUN2} and {NOUN3} {NOUN4}
+1	A {VERB1} {NOUN1} of the {NOUN2} {NOUN3} for {NOUN4} and {NOUN5} is {VERB2} {ADV1}
+1	{ADJ1}-{NOUN1} is {VERB1}
+1	The {NOUN1} is {VERB1} to be {VERB2} {NOUN2} {ADV1}
+1	{VERB1} out of the {ADJ1} {NOUN1} of the {NOUN2} {NOUN3} {NOUN4} would be a {NOUN5}
+1	{NOUN1} are {ADJ1} on {NOUN2}
+1	{VERB1} them to the {NOUN1} iis {ADJ1}
+1	{NOUN1} and {ADJ1} {NOUN2}
+1	{ADJ1} {NOUN1} {ADJ2} {NOUN2}
+1	{NOUN1}: {ADJ1} {NOUN2} {NOUN3}
+1	{NOUN1}: {NOUN2} will be {VERB1} with {ADJ1} {NOUN3} upon {NOUN4}
+1	{VERB1} the {NOUN1} for {NOUN2} {ADV1}
+1	Each {NOUN1} {NOUN2} during the {NOUN3} of the {NOUN4} will be a {NOUN5} {NOUN6}
+1	{NOUN1} FOR {NOUN2}
+1	{VERB1} the {NOUN1} {VERB2} {NOUN2} as {VERB3} in {NOUN3} {ADV1}
+1	{NOUN1}: {NUM1}
+1	{NOUN1} {ADV1} {ADV2}
+1	The {NOUN1} who are {ADJ1} for {NOUN2} are as {VERB1}
+1	{NOUN1} {NOUN2} are {ADV1} been {VERB1} on the {ADJ1}
+1	{VERB1} 's {VERB2} {NOUN1}
+1	{NUM1} in {NUM2} {NOUN1}
+1	The {NOUN1} was {VERB1}
+1	With {ADJ1} {NOUN1}
+1	{VERB1} to {VERB2} {ADV1} to {NOUN1}
+1	{VERB1} all is {ADJ1}
+1	The {NOUN1} will {ADV1} be {VERB1} on the {NOUN2} {NOUN3} {ADV2} {ADV3} as {ADJ1}
+1	{NOUN1} {NOUN2} {NUM1} {NOUN3} {NOUN4}
+1	{VERB1} to be a {ADJ1} {NOUN1}
+1	{NOUN1} {ADV1} {ADV2} for the {NOUN2}
+1	{NOUN1} {NOUN2} are {VERB1} as {VERB2}
+1	{NOUN1} {NUM1} {NOUN2} {NOUN3} {NUM2} {NOUN4}
+1	{ADJ1} {NOUN1}, {NOUN2}
+1	{NUM1}. In {NOUN1} {NUM2}, {VERB1} {NUM3} {NOUN2} {NOUN3} to {NUM4} {NOUN4}
+1	{NUM1}. {VERB1} the {NOUN1} of {NOUN2} as it is {ADV1} {VERB2} in {NOUN3} {NUM2}
+1	{NUM1}. In the {NOUN1}, the {NOUN2} {NOUN3} should {ADV1} {VERB1} to {NOUN4}
+1	{NUM1}. In {NOUN1} {NOUN2}, {VERB1} a {NOUN3} after {NOUN4} in the {ADJ1} {NOUN5}
+1	{NUM1}. {NOUN1} should be {VERB1} as it is {ADV1} {VERB2} in {NOUN2} {NUM2}
+1	The {ADJ1} {NOUN1} {NOUN2} {NOUN3} is {NUM1}
+1	{VERB1} the {VERB2} {NOUN1}
+1	{VERB1} 's {VERB2}
+1	The {NOUN1} {VERB1} their {NOUN2}
+1	The {ADJ1} {NOUN1}, the {ADJ2} {NOUN2} {VERB1} the {ADJ3} {NOUN3} {NOUN4}
+1	{ADJ1} {NOUN1} over {VERB1} the {NOUN2} {VERB2} with the {ADJ2} {NOUN3}
+1	{VERB1} to {VERB2} the {NOUN1} to the {NOUN2} 's {NOUN3} {NOUN4}
+1	In the {ADJ1} {NOUN1} {ADJ2} {NOUN2} will {VERB1} to be {VERB2}
+1	The {NOUN1} has {VERB1} an {ADV1} {ADJ1} {NOUN2} of {NOUN3}
+1	{VERB1} being {NOUN1} of the {ADJ1} {NOUN2}-{VERB2} {NOUN3}
+1	The {NOUN1} has {VERB1} a {ADJ1} and {ADJ2} {NOUN2} {NOUN3} for {ADJ3} {NOUN4}
+1	{ADJ1}, {ADV1} {ADJ2}, {NOUN1} to the {NOUN2} {VERB1} {ADJ3}
+1	{NUM1} or {NUM2}
+1	The {NOUN1} to {VERB1} is:{NUM1}
+1	{NOUN1}: {NOUN2} {NOUN3}
+1	{NOUN1} is {ADV1} {ADJ1} for {NOUN2}
+1	{VERB1} all the {NOUN1} and {NOUN2} from {NOUN3} to {NOUN4}
+1	{VERB1} for {ADJ1} {NOUN1} at {NOUN2}
+1	The {NOUN1} will {VERB1} {ADJ1}
+1	{NOUN1} of the {NOUN2}, {NOUN3}, {NOUN4} and {ADJ1} {NOUN5} will be {VERB1}
+1	{NOUN1} in the {NOUN2}, {NOUN3}, {NOUN4} and {NOUN5} will be {VERB1}
+1	The {NOUN1} {VERB1} {ADJ1} and {ADJ2}
+1	{NOUN1} in {NOUN2} will be {VERB1}
+1	{ADJ1} {NOUN1} will {VERB1} {ADJ2}
+1	{NOUN1} in the {NOUN2} and {NOUN3} will be {VERB1}
+1	{VERB1} {NOUN1} over the {NOUN2}
+1	{VERB1} {NOUN1} and {NOUN2} to the {NOUN3} and {NOUN4}
+1	{NOUN1} {NOUN2} will be {VERB1}
+1	{VERB1} in {NOUN1}-{NOUN2} and {VERB2} one 's {NOUN3}
+1	{ADJ1} {NOUN1}, {NOUN2}, {NOUN3}, {NOUN4} in {NOUN5}, {ADJ2} {NOUN6}, {ADJ3} {NOUN7} will be {VERB1}
+1	{VERB1} {NOUN1} and {NOUN2} {NOUN3} {NOUN4}, {ADJ1} {NOUN5}, {NOUN6}, {NOUN7}, {NOUN8}, {NOUN9} and {NOUN10} {NOUN11}
+1	{VERB1} the {NOUN1} to {VERB2} until {NUM1}-{NUM2} {NOUN2} of {NOUN3}
+1	The {NUM1} {NOUN1} of the {NOUN2} are {VERB1} {ADV1}
+1	In the {ADJ1} {NUM1} {NOUN1}, the {NOUN2} {ADV1} {VERB1} their {NOUN3} on the {NOUN4}
+1	The {ADJ1} {NOUN1} is {ADV1} {ADJ2} than {ADJ3} {ADJ4} {NOUN2}
+1	The {NOUN1} {VERB1} {ADV1}
+1	{ADJ1} {NOUN1} of {ADJ2} {NOUN2}
+1	The {NOUN1} is a {ADV1} {ADJ1} {NOUN2}
+1	{NOUN1} is {VERB1}
+1	{NOUN1}: {ADJ1} {NOUN2} {VERB1}
+1	The {NOUN1} {NOUN2} {VERB1} {NOUN3} were {ADJ1} to {VERB2} the {ADJ2}
+1	{NOUN1} {VERB1} in {NOUN2} have been {VERB2} onto the {NOUN3} and {ADV1}
+1	{NOUN1} are being {VERB1} all the {NOUN2}, {VERB2} {NUM1} {NOUN3} who {VERB3} their {NOUN4}
+1	{VERB1} to the {NOUN1}
+1	{NOUN1} {VERB1} in to {VERB2} a {NOUN2}
+1	The {NOUN1} {NOUN2} is
+1	{NOUN1}: {NOUN2} AT THE {NOUN3}
+1	{NOUN1} are {ADV1} {VERB1} to {NOUN2} {NOUN3} in the {ADJ1} {NOUN4}
+1	{NOUN1} as a {ADJ1} {VERB1} {NOUN2}
+1	{NOUN1} {VERB1} to {VERB2} with what is {VERB3} {NOUN2}
+1	{NUM1}. {ADJ1} {NOUN1} {NOUN2}
+1	{VERB1} to {VERB2} {ADV1} and {ADV2}
+1	{VERB1} yourself {VERB2} on a {ADJ1}, {ADJ2} {NOUN1} {VERB3} in the {NOUN2} of the {NOUN3}
+1	{VERB1} yourself {VERB2} above the {NOUN1} and {NOUN2}
+1	The {ADJ1} {NOUN1} {VERB1} {ADJ2} and {ADJ3}
+1	{VERB1} yourself {VERB2} on the {NOUN1} {ADV1} and {ADV2}
+1	{NUM1}. {NOUN1} {NOUN2}
+1	{VERB1} {ADV1} into the {NOUN1} is what {VERB2} {NOUN2} - it is a {ADJ1} {NOUN3}
+1	The {ADJ1} {NOUN1} is to {VERB1} {VERB2}
+1	The {ADJ1} {NOUN1} {VERB1} {ADJ2} {NOUN2}, {ADV1} {VERB2} down, were {ADV2} {ADJ3}
+1	{ADJ1} {NOUN1} {VERB1} {NOUN2} in the {NOUN3} about the {NOUN4} 's {NOUN5}
+1	The {ADJ1} {NOUN1} will {VERB1} the {NOUN2} and {NOUN3} of a {ADJ2}-{NOUN4} {NOUN5} {NOUN6}
+1	{NOUN1}: {NOUN2}, {NOUN3}, {NOUN4}, {NOUN5}, {NOUN6}, {NOUN7}, {NOUN8}, {NOUN9}, {NOUN10}, {NOUN11}
+1	Any {NOUN1} would be {VERB1}
+1	{VERB1} {ADJ1} {NOUN1}
+1	{VERB1} the {ADJ1} {NOUN1} and {VERB2} the {NOUN2} {VERB3} {ADV1}
+1	{ADJ1} {ADJ2} {NOUN1} are {ADJ3} to {VERB1} {ADJ4} {NOUN2} for {ADJ5} {NOUN3}
+1	{VERB1} the {NUM1} {NOUN1} to the {VERB2} {NOUN2}
+1	Over {NOUN1}, the {NOUN2} 's {NOUN3} {VERB1} to {VERB2} its {NOUN4}
+1	{ADJ1} {ADJ2} {NOUN1} and {NOUN2} have {VERB1} {ADJ3} {NOUN3} for {NOUN4}, for {NOUN5}
+1	The {NOUN1} {VERB1} {NOUN2} and {NOUN3} {NOUN4} for {NOUN5} {NOUN6}
+1	{NOUN1} can {VERB1} {ADJ1} {NOUN2}
+1	{NOUN1} for {NOUN2}, {NOUN3} {NOUN4} {VERB1} {ADJ1} {NOUN5} and {ADJ2} {NOUN6} than {NOUN7}
+1	{NOUN1}: {NOUN2} {VERB1}, {NOUN3} {VERB2}
+1	{NOUN1} {VERB1} {ADV1} on their {NOUN2} from the {NOUN3} and {NOUN4} {VERB2} {ADV2}
+1	The {ADJ1} {NOUN1} is {VERB1} up {ADV1} {NUM1} {NOUN2} before it {VERB2} to
+1	Some {VERB1} {NOUN1} {ADV1} have {VERB2} across some of its {NOUN2}
+1	{NOUN1} {NOUN2} are {VERB1} {NUM1} {NOUN3} {ADV1}
+1	The {NOUN1} {ADV1} {VERB1} {NOUN2} of {NOUN3} {NOUN4} {ADJ1} as {NOUN5} {NOUN6} and {NOUN7}
+1	Some of the {ADJ1} {NOUN1}
+1	Some {VERB1} to {VERB2}, but {ADV1} {ADJ1} were {ADJ2} to
+1	The {ADJ1} {NOUN1} will be {ADJ2}
+1	{NOUN1} {VERB1} {ADV1} and {ADV2}
+1	{NOUN1} may {ADV1} {VERB1} {ADJ1} at a {ADV2} {ADJ2} {NOUN2}
+1	{NOUN1} and {NOUN2} {VERB1} {ADV1}
+1	{VERB1} {ADJ1} and {ADJ2}, and {NOUN1} is {ADV1} {ADJ3} to {VERB2} in {NUM1}
+1	{NUM1}{NUM2} {NOUN1}
+1	{NOUN1} {NOUN2} {NUM1}-{NUM2}
+1	{NUM1} {NOUN1} is {VERB1}
+1	{NUM1} {ADJ1} {NOUN1} {NOUN2} was {NUM2} {ADJ2} {NOUN3}
+1	{NOUN1} of {ADJ1} {NOUN2} {NOUN3}
+1	At {NOUN1}, {ADV1}, he {VERB1} {ADV2}, and the {NOUN2} might {VERB2} him
+1	THE {ADJ1} {NOUN1}
+1	{NOUN1}: {NOUN2}, {NOUN3}, {NOUN4}, {NOUN5}
+1	An {NOUN1} of the {NOUN2} of such an {NOUN3} is {ADV1} in {NOUN4}
+1	{NUM1}. The {ADJ1} {NOUN1}
+1	{NOUN1} {NOUN2} will {VERB1} a {ADJ1} {NOUN3} in {ADJ2} {ADJ3} {NOUN4}
+1	{NOUN1} with {ADJ1} {NOUN2} and {NOUN3}-{NOUN4} are {VERB1} to {VERB2}
+1	Across the {NOUN1}, the {ADJ1} {NOUN2} is {VERB1} to the {NOUN3} {NOUN4}
+1	{NUM1} - {NOUN1} of the {ADJ1} {NOUN2} who were {ADJ2} before the {NOUN3}
+1	{NUM1} - {NOUN1} of the {ADJ1} {NOUN2} who are {ADJ2} a {NOUN3} after the {NOUN4}
+1	A {NOUN1} 's {ADJ1} {NOUN2}
+1	{VERB1} the {NOUN1} {ADJ1}
+1	{VERB1} a {NOUN1} {ADV1} to the {ADJ1}
+1	A {NOUN1} with a {NOUN2} of {NOUN3}
+1	{NUM1} - The {ADJ1} {NOUN1} for {ADJ2} {NOUN2} since the {NOUN3} of the {NOUN4}
+1	{NOUN1} of the {ADJ1}
+1	{NUM1}{NUM2} - {NOUN1} of {NOUN2} in the {NOUN3} but {ADV1} {VERB1} as {ADJ1}
+1	The {ADJ1} {NOUN1}
+1	A {NOUN1}-{ADJ1} {NOUN2}
+1	{ADJ1}-{NOUN1} {NOUN2}
+1	{NOUN1} in his {NOUN2}
+1	Another {NOUN1} in his {NOUN2}
+1	A {ADJ1} {NOUN1} for the {ADJ2} {NOUN2} and {NOUN3}
+1	{VERB1} the {NOUN1} on {ADJ1} {NOUN2} and {VERB2} {NOUN3} to {NOUN4}
+1	{NOUN1} is to {VERB1} the {NOUN2} {VERB2}
+1	{VERB1} {NUM1} {NOUN1} {ADV1} {VERB2} {ADV2} {ADV3}
+1	{VERB1} {NUM1} {ADJ1} {NOUN1} {ADV1} {VERB2} the {NOUN2}
+1	{ADJ1} {NOUN1} AND {ADJ2}
+1	A {NOUN1} will be {ADV1} {ADJ1} than a {NOUN2}
+1	{VERB1} the {NOUN1} {NUM1}-{NUM2} {NOUN2} a {NOUN3} with {NOUN4}
+1	{VERB1} {NOUN1} of {NOUN2} {NOUN3} like {NOUN4}, {NOUN5}, {NOUN6} in the {NOUN7}
+1	{NOUN1} are {ADV1} {ADV2} {ADJ1}
+1	{VERB1} {ADV1} {VERB2} {ADV2}
+1	{NOUN1} {NOUN2} and {NOUN3} {VERB1} to be {ADJ1}
+1	{NOUN1} are {ADJ1} {ADV1}, but {VERB1} a {NOUN2} {NOUN3} for an {ADJ2} {NOUN4}
+1	{NOUN1} for {NOUN2} will be {ADJ1}
+1	{VERB1} a {NOUN1} {NOUN2} and {NOUN3} {NOUN4} or {ADJ1} {ADJ2} {NOUN5}
+1	{NOUN1} is {ADJ1}
+1	{ADJ1} ,{ADJ2}, but {ADV1} {ADJ3}
+1	{NOUN1} in {NOUN2} for the {NOUN3}
+1	{VERB1} a {NOUN1} from the {NOUN2}
+1	{VERB1} a {ADJ1} {NOUN1} and {VERB2} the {NOUN2} with {NOUN3}
+1	{VERB1} the {NOUN1} for a {NOUN2} of {NOUN3}
+1	{VERB1} the {NOUN1} for {NOUN2}
+1	{VERB1} {ADV1} {ADJ1} {NOUN1} as {NOUN2} {NOUN3} may {VERB2} up ur {NOUN4} s {ADJ2} {NOUN5}
+1	{VERB1} {ADJ1} the {NOUN1} is {ADJ2}
+1	{VERB1} {NOUN1} {NOUN2} {ADV1} {ADV2} by {VERB2} the {NOUN3} {NOUN4}
+1	{NOUN1} {NOUN2} are the {ADV1} {ADJ1} for {NOUN3}
+1	{ADJ1} {ADJ2} {NOUN1} {VERB1} a {NOUN2} {VERB2} into the {NOUN3} under the {NOUN4}
+1	{VERB1} to {VERB2} the {NOUN1} {NOUN2} onto the {NOUN3} on the {NOUN4}
+1	{NOUN1} are {NOUN2} {VERB1} {NOUN3} and it may be the {NOUN4} is {ADJ1}
+1	{VERB1} him {NOUN1}
+1	{ADJ1} {NOUN1} {ADV1} {ADV2} {VERB1} past {NUM1}-{NUM2} {NOUN2}
+1	{NOUN1} of {NOUN2} {VERB1} {ADJ1} than {NUM1} {NOUN3} are {ADJ2}
+1	{NOUN1} are {ADJ1} to {VERB1} {NOUN2} with, but it 's {VERB2} {ADV1} {ADV2}
+1	{NOUN1} would {VERB1}
+1	{VERB1} {NOUN1} for {NOUN2}, {VERB2} {NOUN3} and {VERB3} {NOUN4}, {VERB4} out {NOUN5} {NOUN6} and {NOUN7}
+1	Any {ADJ1} {NOUN1}
+1	Both are {ADJ1} {NOUN1} {ADV1} {VERB1} for the {ADJ2} {NOUN2}
+1	The {ADJ1} {NOUN1} Is {ADV1} {ADJ2}
+1	{VERB1} to a {NOUN1} {NOUN2}
+1	{VERB1} at a {NOUN1}-{NOUN2} {NOUN3} {NOUN4}
+1	{ADJ1} {NOUN1}{NUM1} is {ADJ2}
+1	The {NOUN1} is what they {VERB1} to {VERB2}, VS what 's {ADJ1} for them
+1	{ADJ1} of the {NOUN1} {NUM1} is {ADV1} {ADJ2} in {VERB1} than the {ADJ3}
+1	The {NOUN1} {NOUN2} should be {NUM1}-{NUM2}
+1	{VERB1} the {NOUN1} {NOUN2} up to {NUM1} {NOUN3}
+1	{ADJ1} {NOUN1} is a {NOUN2} of {ADJ2} {NOUN3}
+1	{NOUN1}, {ADJ1} {NOUN2}, and {NOUN3}
+1	In the {NOUN1} {VERB1} {ADJ1} she {VERB2} {NOUN2} of {NOUN3} {ADJ2} to her
+1	The {NOUN1} {NOUN2} could {VERB1}
+1	The {NOUN1} {NOUN2} {VERB1} as a {NOUN3} to {VERB2} out the {ADJ1} {NOUN4}
+1	{NOUN1} {NOUN2}: {NOUN3} {VERB1} {ADJ1} {NOUN4} {NOUN5}, which is {ADJ2}
+1	{NOUN1} {VERB1} {ADJ1} {NOUN2} which could be {ADJ2} or {ADJ3}
+1	Either {NOUN1} {ADJ1} and {ADJ2} {ADJ3} {NOUN2} {VERB1} the {ADJ4} {NOUN3}
+1	{NOUN1} will be {ADJ1} but {ADJ2} then the {NOUN2}
+1	{NUM1} {NOUN1}: {NOUN2} {VERB1} {NUM2} {NOUN3}
+1	{NOUN1} {VERB1} {NUM1} {NOUN2}
+1	{NOUN1} {NOUN2} are {ADJ1} {NOUN3}, and {ADV1} {ADJ2} {VERB1}
+1	{VERB1} a {ADV1} {ADJ1} {NOUN1} is {ADV2} {ADJ2} in {VERB2} out {ADJ3} {NOUN2} {NOUN3}
+1	{NOUN1} {NOUN2} and the {NOUN3}
+1	{VERB1} {NOUN1} {ADV1}
+1	{ADJ1} {NOUN1} {NOUN2} from {ADJ2} of the {ADJ3} {NOUN3} {NOUN4}, {ADV1} {NUM1} {NOUN5} in {NOUN6}
+1	{VERB1} some {NOUN1} on them {NOUN2}
+1	{NUM1}. Be {ADJ1}
+1	{NUM1}. {VERB1} with them
+1	{NUM1}. {VERB1} the {NOUN1} {NOUN2}
+1	{NOUN1} is the {NOUN2} {ADV1}
+1	{NOUN1} {VERB1} from {NUM1} per {NOUN2}
+1	{VERB1} {NUM1} {NOUN1} {ADJ1} {NOUN2} and {VERB2} IT
+1	{VERB1} them to {NUM1} {NOUN1} with {ADJ1} to {VERB2} {NOUN2}
+1	{VERB1} {VERB2} the {NOUN1} a {ADJ1} {NOUN2} a {NOUN3} for {ADJ2} {NOUN4} of {NOUN5}
+1	{VERB1} the {NOUN1} {ADV1} to the {NOUN2}
+1	{VERB1} {NOUN1} and {NOUN2}
+1	The {NOUN1} {NOUN2} was {VERB1} {ADV1} in {NOUN3}
+1	{VERB1} which {NOUN1} {VERB2}
+1	Some {NOUN1} {NOUN2} {VERB1} to {VERB2} on {NUM1} or the {ADJ1}
+1	{NOUN1} of {NOUN2} could be {ADJ1} on {ADV1} {ADJ2} {NOUN3}
+1	{ADJ1} than a {NOUN1} {NOUN2}
+1	{VERB1} him out for half an {NOUN1}, to {VERB2}
+1	{VERB1} the {NOUN1} on the {NOUN2} and {ADV1} {VERB2} around the {NOUN3} a {ADJ1} {NOUN4}
+1	{VERB1} something {ADJ1} {ADV1}
+1	{VERB1} him {VERB2} {ADV1} and {ADV2} for a {ADJ1} {NOUN1}
+1	{VERB1} the {NOUN1} and {VERB2} him out and {VERB3} {ADV1} he {VERB4}
+1	{NOUN1} {ADV1} will {VERB1} at some {NOUN2}
+1	{VERB1} {ADJ1} {NOUN1} and {VERB2} {NOUN2} {NOUN3}
+1	For them, {NOUN1} would {ADV1} be {VERB1} in {NOUN2} or {NOUN3}, {ADV2} {VERB2} off
+1	{VERB1} an {NOUN1}
+1	{VERB1} to the {NOUN1}, he is {ADJ1} and {VERB2} {ADJ2}
+1	{VERB1} {NOUN1} can {VERB2} a {NOUN2} without {VERB3}
+1	{NOUN1} {NOUN2} {ADV1} {VERB1} {VERB2}, {ADV2} during the {ADJ1} {NOUN3} of the {NOUN4}
+1	In a {ADJ1} {NOUN1} the {NOUN2} will {VERB1} to {VERB2} its {NOUN3}
+1	{VERB1} her back in the {NOUN1}, and {VERB2} the {NOUN2} {ADJ1} for a {NOUN3}
+1	{VERB1} it {NUM1} the {ADJ1} {NOUN1}, {ADV1} {NUM2}, and {ADV2} {ADV3}
+1	{NOUN1} is {ADJ1}, unless they {VERB1} to {VERB2}
+1	{NOUN1} is, it {VERB1}
+1	Any {NOUN1} would be {ADV1} {VERB1}
+1	{NOUN1} on the {ADJ1} {NOUN2} can {ADV1} be {VERB1} by a {ADJ2} {NOUN3}
+1	As for the {NOUN1}, {ADV1} be {ADJ1} to {VERB1} a {NOUN2}
+1	{ADJ1} of {NOUN1}
+1	At {ADV1} it was {ADV2} {ADJ1} and all
+1	The {ADJ1} {NOUN1} {VERB1} them
+1	The {NOUN1} {VERB1} either {ADJ1} or {ADJ2}
+1	The {NOUN1} is the {ADJ1}, {VERB1} a {ADV1} {ADJ2} {NOUN2}
+1	Some {ADJ1} {NOUN1}, {ADV1}, can be {VERB1}
+1	{ADJ1} {NOUN1} and {NOUN2} are {ADJ2} plus an {NOUN3}
+1	{NUM1} of them is {ADV1} {ADJ1} and is {ADV2} {NUM2}{NOUN1} {ADJ2}
+1	{NUM1} of them are {ADV1} {ADJ1} and are {ADV2} {NUM2}-{NUM3}{NOUN1} {ADJ2}
+1	The {ADJ1} {NOUN1} is {ADJ2} {ADV1} but it is {ADV2} {NUM1}{NOUN2} {ADJ3}
+1	{NOUN1} in {NOUN2}
+1	{VERB1}out the {ADJ1} {NOUN1}
+1	{VERB1} and {VERB2} {ADV1} {ADJ1} {NOUN1}, they may {VERB3} {ADJ2}
+1	In {NOUN1} the {NOUN2} can {VERB1} in the {NOUN3} {NOUN4}
+1	{ADJ1} {NOUN1} are {ADJ2} to {VERB1} a {ADJ3} {NOUN2}
+1	The {NOUN1} is {VERB1} {ADV1}, with {ADJ1} {ADJ2} {NOUN2} {NOUN3}
+1	{NOUN1} {ADJ1} {NOUN2} and {NOUN3} {NOUN4} are {VERB1} to the {ADJ2} {NOUN5}
+1	Both are {VERB1} {VERB2} in {NOUN1} the {NOUN2} of the {NOUN3}
+1	The {NOUN1} {VERB1} {NOUN2} of {NOUN3}, {ADV1} {VERB2}
+1	{NOUN1} {NOUN2}, {NOUN3} {NOUN4}, {ADJ1} {NOUN5} and {ADJ2} {ADJ3} {NOUN6}
+1	The {ADJ1} {NOUN1} of {NOUN2} and {NOUN3} will be a {ADJ2} {NOUN4} for the {NOUN5}
+1	Any {NOUN1} would be {ADJ1}
+1	The {NOUN1} of {NOUN2} can be {VERB1} by {VERB2} the {NOUN3} {NOUN4}
+1	The {NOUN1} is the {NOUN2} who is {ADJ1}
+1	{VERB1} at {NOUN1}, {NOUN2} {NOUN3} and {ADJ1}
+1	{NUM1} {NOUN1} {ADV1} {VERB1} his {NOUN2} {NOUN3} after being {VERB2} for {NOUN4}
+1	{ADJ1}, {ADJ2}, {ADJ3} {NOUN1}
+1	The {NOUN1} was {ADJ1}, the {NOUN2} was {ADJ2} and the {NOUN3} were {ADJ3} {NOUN4}
+1	{VERB1} the {NOUN1} and {NOUN2}
+1	{NOUN1} and {NOUN2} is {ADJ1}
+1	{NOUN1} {ADV1}, {ADJ1} {NOUN2} in the {NOUN3}
+1	{ADJ1} {ADJ2} {NOUN1} {NOUN2}
+1	{NOUN1} {VERB1} {NOUN2} {NOUN3} and was {ADV1} {ADJ1}
+1	The {ADJ1} in the {NOUN1}
+1	The {NOUN1} is {ADJ1} and the {NOUN2} are {ADV1} {ADJ2}
+1	{ADJ1} {NOUN1} {NOUN2} and {ADJ2} {NOUN3}
+1	{VERB1} to {VERB2} out of {NOUN1}
+1	{VERB1} by the {NUM1}-{NOUN1} {NOUN2}
+1	{ADJ1} {ADJ2} {NOUN1} in the {NOUN2}
+1	The {NOUN1} {ADV1} is {ADJ1} and {ADJ2} out of the {NOUN2}
+1	The {NOUN1} is {VERB1} {ADV1} by the {NUM1} {NOUN2} on {NOUN3}
+1	The {NOUN1} are {ADV1} {VERB1} and are {ADJ1} at {VERB2} all {NOUN2} of {NOUN3}
+1	{ADJ1}, {ADJ2} {NOUN1} on {NOUN2}
+1	{ADJ1}, {VERB1} {NOUN1}, {ADJ2} {NOUN2}, {ADJ3} {NOUN3}
+1	{ADJ1} {NOUN1}, DO NT {VERB1}
+1	The {NOUN1} {VERB1} {ADJ1} and {ADV1} {ADJ2}
+1	{VERB1} THE {NOUN1}, {NOUN2}
+1	{NOUN1} {VERB1} {NOUN2}
+1	The {NOUN1} {ADV1} is {ADJ1}
+1	{NOUN1} of {NOUN2} {ADV1} {ADJ1}
+1	{NOUN1} {NOUN2} is {ADV1} {ADJ1}
+1	{ADJ1} {NOUN1} in {NOUN2}
+1	{NOUN1} {ADV1} is {ADV2} {ADJ1}
+1	The {ADJ1} {NOUN1} in {NOUN2}
+1	The {NOUN1} who {VERB1} the {ADJ1} {NOUN2} is {ADJ2}
+1	{VERB1} by {NOUN1}, {ADV1}
+1	The {NOUN1} were {ADV1} {ADJ1}, {VERB1} the {NOUN2} and {NOUN3}
+1	{NOUN1} are {ADV1} {ADJ1}
+1	{ADJ1} {NOUN1} at an {ADJ2} {NOUN2}
+1	{NOUN1} has {VERB1} a {ADJ1} {NOUN2}
+1	The {NOUN1} {ADV1} {ADV2} {VERB1} to be {VERB2}
+1	{VERB1} {NOUN1} {ADV1} and it s {ADV2} {ADJ1} {ADV3}
+1	The {NOUN1} are {ADJ1} as {NOUN2} and the {NOUN3} is {ADJ2}
+1	The {NOUN1} {NOUN2} is {ADJ1}
+1	{NOUN1} {NOUN2} {VERB1} {ADV1} {ADV2} and {NOUN3} 4 the {ADJ1} {NOUN4}
+1	{VERB1} to {NOUN1} {NOUN2}, the {NOUN3} is {VERB2}
+1	{ADJ1} {NOUN1} {ADV1} near {NOUN2} {NOUN3}
+1	{ADJ1} for {ADJ2} with the {NOUN1}
+1	{NOUN1} of {NOUN2}, {ADJ1} {ADJ2} {NOUN3} {NOUN4}, {NOUN5}, {ADJ3} {NOUN6} {NOUN7}
+1	{ADJ1} {NOUN1} {ADJ2} {NOUN2} {ADJ3} {NOUN3}
+1	{ADJ1}, {ADJ2}, {ADJ3} {ADV1} is the {ADJ4} in all {NOUN1} and {NOUN2}
+1	{ADJ1} Every {NOUN1}
+1	{ADJ1} {ADJ2} {NOUN1} {ADV1}
+1	The {NOUN1} {VERB1} {ADV1} are {ADV2} {ADV3} {NOUN2} and {ADJ1}
+1	{NOUN1} {NOUN2} {VERB1}, {NOUN3} {NOUN4} is {ADV1} {ADJ1}
+1	{ADJ1} {NOUN1} with {ADJ2} {NOUN2}
+1	{ADJ1} {NOUN1} at a {ADJ2} {NOUN2}
+1	{VERB1} he was {ADV1} {ADJ1} for {NUM1} {NOUN1} {NOUN2}
+1	{VERB1} {ADV1} A {NOUN1} {NOUN2}
+1	{ADJ1} {NOUN1} plus
+1	Another {ADJ1} {NOUN1} {VERB1} the {NOUN2}
+1	The {NOUN1} is {ADJ1} at {ADV1}, and {ADV2} {ADJ2} {VERB1} the {NOUN2} {NOUN3} and {NOUN4}
+1	A {ADJ1} {NOUN1} for a {ADJ2} {NOUN2}
+1	{VERB1} and am {VERB2} on {NOUN1} for a {ADJ1} {NOUN2}
+1	{ADJ1} {NOUN1} - {VERB1} {VERB2} out their {NOUN2} before {VERB3} from a {NOUN3}
+1	{NOUN1} {ADJ1}, {NOUN2} {ADJ2}
+1	{ADJ1} {NOUN1} {VERB1} without {NOUN2}, {ADV1} {ADV2} {VERB2} {NOUN3} {NOUN4}
+1	A {ADJ1} {NOUN1} to {VERB1} for {NOUN2} after a {NOUN3} of {NOUN4} {NOUN5}
+1	The {NOUN1} was {ADV1} {ADJ1} - {ADJ2}, {ADJ3} and {ADJ4} without being {ADJ5}
+1	{ADJ1} {NOUN1}- {ADJ2} {NOUN2} {NOUN3}
+1	{NOUN1} were {ADJ1}, {NOUN2} {ADJ2}, and {NOUN3} {ADJ3}
+1	{ADJ1} {NOUN1}, {ADJ2} {NOUN2} {NOUN3}
+1	{ADJ1} {ADJ2} {NOUN1} is {ADV1} {ADJ3} {NOUN2}
+1	The {NOUN1} are {ADJ1} than {ADJ2} and the {NOUN2} are {ADV1} {ADJ3}
+1	The {NOUN1} was {ADJ1}, {ADJ2} on {NUM1} {NOUN2} than the {ADJ3}
+1	The {NOUN1} is {ADJ1}, {VERB1} {ADV1} {ADV2} and a {NOUN2} to be in
+1	{VERB1} a {NOUN1}, it {VERB2} {ADJ1}
+1	{VERB1} the {NOUN1} over and {VERB2} it {ADJ1} with {ADJ2} {NOUN2}
+1	{ADJ1} {NOUN1} {VERB1} {ADJ2} {NOUN2} {VERB2} down a {NOUN3}
+1	{NOUN1} is {NOUN2} of the {NOUN3}
+1	{ADJ1} {NOUN1} {VERB1} from the {ADJ2} {NOUN2}
+1	The {ADJ1} {NOUN1} is the {NOUN2}
+1	The {NOUN1} {NOUN2} was {ADJ1}
+1	{ADJ1} {NOUN1}, AND {ADJ2} {NOUN2}
+1	The {NUM1}-{NOUN1} {NOUN2} from {NUM2} is out of {NOUN3}
+1	The {ADJ1} {ADJ2} {NOUN1} on the {NOUN2}
+1	The {NOUN1} {VERB1} the {ADJ1} but {ADV1} they {VERB2} it up another {NOUN2}
+1	A {ADV1} {ADJ1} {ADJ2} {NOUN1}
+1	{ADJ1} {NOUN1}, {ADJ2} {NOUN2}, {ADJ3} {NOUN3}
+1	{ADJ1} every {NOUN1}
+1	{NOUN1} {ADV1}
+1	The {NOUN1} was a {ADV1} {ADJ1} and {ADJ2}
+1	Any {NOUN1} would be the {ADJ1}
+1	{ADJ1} {NOUN1} {NOUN2} and {NOUN3} {NOUN4}
+1	{ADJ1} {NOUN1} - The {NOUN2} was {ADJ2} and {ADJ3}
+1	The {NOUN1} of {NOUN2} they {VERB1} is {ADV1} {ADJ1}
+1	{NOUN1} {NOUN2} {NOUN3} {NOUN4}, {NOUN5}
+1	{ADJ1} but {ADJ2}
+1	{ADJ1} {NOUN1}, all the {NOUN2}
+1	{NOUN1} {NOUN2} is {ADJ1} and {ADJ2}
+1	The {NOUN1} were {ADV1} {ADV2} {ADJ1} and {ADJ2} with her
+1	{ADJ1}, {ADJ2} and {NOUN1} of {NOUN2}
+1	The {ADJ1} {NOUN1} was {ADV1} {ADJ2}
+1	The {NOUN1} is {ADJ1}, and the {NOUN2} is {ADV1} {ADJ2}
+1	The {NOUN1} {NOUN2} are {ADJ1}
+1	The {NOUN1} {VERB1} a {NOUN2} to be {VERB2}
+1	A {ADJ1} {VERB1}-up {NOUN1} {NOUN2} with a {NOUN3} {ADV1} {VERB2} into a {NOUN4}
+1	{ADJ1}, {ADJ2}, {ADJ3},{ADJ4} and {ADJ5}
+1	{ADJ1} {NOUN1} are in the {NOUN2} {VERB1} {ADJ2} {NOUN3}
+1	The {NOUN1} was {NOUN2} {VERB1} the {NOUN3} {ADJ1}
+1	All of the {NOUN1} were {ADJ1} and {ADJ2}
+1	The {NOUN1} were in {ADJ1} {NOUN2} and the {NOUN3} was {ADJ2}
+1	The {NOUN1} were {ADJ1} and {ADJ2}
+1	The {NOUN1} {ADV1} is {ADJ1} {VERB1} to the {ADJ2} {NOUN2}
+1	{ADJ1}, {ADJ2}, {ADJ3} {NOUN1} with {ADJ4} {NOUN2}
+1	{ADJ1}, {ADJ2}, {ADV1} {NOUN1}
+1	{NOUN1} s {NOUN2}
+1	The {NOUN1} {VERB1} to {VERB2} {NOUN2} and {VERB3} their {NOUN3} {ADV1} {ADV2}
+1	{ADJ1}, {ADJ2} and {ADJ3}
+1	The {NOUN1} {VERB1} {ADV1} and the {NOUN2} was {ADV2} {ADJ1}
+1	The {NOUN1} was {ADJ1} and {ADV1} {ADJ2}
+1	The {NOUN1} {VERB1} {NOUN2} of {NOUN3} {ADV1} for {ADJ1} {NOUN4}
+1	{ADJ1} {NOUN1}, {ADJ2} {NOUN2} and {ADV1} {ADJ3}
+1	The {ADV1}-{VERB1}, {ADJ1} {NOUN1} is a {NOUN2}
+1	{VERB1} AT ALL {NOUN1}
+1	{NUM1} of the {ADJ1} {NOUN1}
+1	{VERB1} {ADV1} since {NOUN1} in {NOUN2}
+1	{ADJ1} {NOUN1} {ADV1} {ADV2}
+1	{ADJ1} {NOUN1} of {NOUN2} {VERB1} {NOUN3} and {VERB2} {NOUN4} {NOUN5}
+1	{NOUN1} is a {NOUN2} and the {NOUN3} is a {NOUN4}
+1	With {ADJ1} than {ADJ2} {NOUN1} to {VERB1}
+1	{ADJ1} {NOUN1} {NOUN2} is {ADJ2}
+1	{VERB1} {ADV1} {ADV2} {ADV3} AS {ADJ1}
+1	{NUM1} {NOUN1} was {ADV1} {ADJ1}
+1	{NOUN1} and {ADJ1} {NOUN2} {NOUN3}
+1	{VERB1} {NOUN1} {NOUN2} without {NOUN3} was {ADV1} a {ADJ1} {NOUN4}
+1	{NOUN1} {VERB1} {NUM1} {NOUN2} and {ADJ1}{NOUN3} {NOUN4} {VERB2} {NUM2} {NOUN5} 's {NOUN6}
+1	Over {NOUN1}, {ADJ1}
+1	{ADJ1} {NOUN1} - {ADJ2} {NOUN2}
+1	The {NOUN1} is {ADV1} {ADJ1}
+1	{NOUN1}, {ADJ1} {NOUN2}
+1	The {ADJ1} {NOUN1} they {VERB1} to {VERB2} {ADJ2} {NOUN2}
+1	{ADJ1} {NOUN1} In {NOUN2}
+1	{NOUN1} and {NOUN2} {NOUN3}
+1	{NOUN1}, {NOUN2}, {NOUN3}, {NOUN4}, {NOUN5}, {NOUN6}
+1	The {NOUN1} is {ADJ1} and {ADJ2}
+1	{ADJ1} {NOUN1}, {ADV1} {ADJ2}, {ADJ3} {NOUN2}
+1	The {NOUN1} are {ADV1} {ADJ1} and {ADJ2}
+1	The {NOUN1} of {NOUN2}, {NOUN3} and {NOUN4} is {ADJ1} {ADV1}
+1	{NOUN1} are {VERB1} {ADV1} {ADJ1}, {NOUN2} {VERB2} {ADJ2} and the {NOUN3} {NOUN4} is {ADV2} {ADJ3}
+1	{ADJ1} {NOUN1}, {NOUN2}, and {NOUN3} {NOUN4}
+1	{NOUN1} {NOUN2} {ADJ1} and {NOUN3} {NOUN4} at {NOUN5} {NOUN6}
+1	The {NOUN1} has {ADV1} {VERB1} the {VERB2} {NOUN2}
+1	{VERB1} to {VERB2} {ADJ1} {NOUN1}, and the {NOUN2} themselves are on the {ADJ2} {NOUN3}
+1	A {ADJ1} {NOUN1} in a {ADJ2} {NOUN2}
+1	{NOUN1} {NOUN2} with {NOUN3}
+1	{ADJ1} {NOUN1} for a {ADJ2} {NOUN2}
+1	{NOUN1} and {NOUN2}, {ADJ1} {NOUN3}
+1	The {NOUN1} is {ADJ1}, the {NOUN2} is {ADJ2}
+1	Like the {NOUN1} with the {NOUN2} {NOUN3}
+1	{VERB1} a {NOUN1} {VERB2} {NOUN2} with {NOUN3}
+1	{ADJ1} {NOUN1}, {ADJ2} {NOUN2} {NOUN3}, {ADJ3} {NOUN4}
+1	The {ADJ1} {NOUN1} {VERB1} {ADV1} {NUM1} {NOUN2}
+1	{ADJ1}, {ADJ2}, and above all {ADJ3}
+1	{NOUN1} for the {ADJ1} {NOUN2} and the {ADJ2} {NOUN3}
+1	A {NOUN1} would {VERB1} up, {ADV1} a {NOUN2} in a {ADJ1} {NOUN3} would {VERB2} up
+1	{ADJ1} {NOUN1} {ADV1} the {NOUN2} would {VERB1}, {ADV2} the {NOUN3}
+1	{NOUN1} were a {ADJ1} {NOUN2}, nothing {ADV1} {ADJ2}
+1	{NOUN1} {ADJ1}
+1	{NOUN1} was {VERB1} {ADV1}, {ADV2} {ADJ1} and {ADJ2}
+1	{ADJ1} {NOUN1}, {ADJ2} {NOUN2}, {ADJ3} {NOUN3}, {ADJ4} {NOUN4}
+1	The {NOUN1} was {ADJ1} and {ADJ2}
+1	{ADJ1} {NOUN1} and {NOUN2}
+1	The {NOUN1} {VERB1} the {NOUN2} of the {NOUN3}
+1	{ADJ1} {NOUN1}, but {ADV1} some {NOUN2}
+1	{ADJ1} {NOUN1} got {VERB1} into another {NOUN2}, on the {ADJ2} {NOUN3} with {ADJ3} {NOUN4} {NOUN5}
+1	{NOUN1} {ADJ1}, {ADJ2} {NOUN2} {NOUN3}
+1	The {NOUN1} is {ADV1} {ADV2} {ADV3} {ADJ1} to {VERB1} with
+1	{NUM1} {NOUN1} and at {ADJ1} {NUM2} {NOUN2} are {ADV1} {ADJ2} {NOUN3}
+1	{NOUN1} of {NOUN2}, {NOUN3} {NOUN4}, {ADJ1} {NOUN5} {NOUN6} was {ADJ2} it
+1	{NOUN1} was {ADJ1} except {NOUN2} {NOUN3} which {VERB1} {NOUN4} {NOUN5}
+1	The {NOUN1} {VERB1} a {NOUN2} with {ADJ1} {NOUN3} {NOUN4}, but {ADV1} {NUM1} {VERB2}
+1	{VERB1} with the {NOUN1}
+1	{NOUN1} was {ADV1} an {ADJ1}-and-{ADJ2} {NOUN2}
