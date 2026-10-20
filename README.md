@@ -24,7 +24,13 @@ Saves PNGs with metadata that can be uploaded to Civitai.
 
 Takes a `MODEL` and returns the paths of every checkpoint and LoRA in its loader chain, one per line, with LoRA strengths appended. Connect it to `model_path`.
 
-It reads the checkpoint, diffusion model and LoRA loaders upstream through `ckpt_name`, `unet_name` and `lora_name`. Loaders with other input names are not detected. Bypassed nodes and inputs fed by links are skipped.
+It reads the checkpoint, diffusion model, LoRA and **Load LoRAs** loaders upstream through `ckpt_name`, `unet_name` and `lora_name`. Loaders with other input names are not detected. Bypassed nodes, inputs fed by links and LoRAs with strength 0 are skipped.
+
+### Load LoRAs (`HaoVA | Model`)
+
+Applies any number of LoRAs in order to a `MODEL` and/or `CLIP`; either input can be left unconnected. Use **+ Add LoRA** at the bottom to add a row with a searchable LoRA list and a strength used for both model and CLIP, and **Remove** under a row to delete it. Each LoRA has its own `trigger words`, and the `trigger_words` output joins them with commas so it can be connected to a prompt. The `preset_name` output is the name of the selected preset, or empty if none is selected. When the `preset` select is promoted out of a subgraph (or linked), the editing widgets are hidden and the LoRAs are taken directly from the selected preset. Entries left on `None` are skipped.
+
+**Save preset** stores the current list under a name inside the node, so it is saved with the workflow, and the `preset` select loads a saved list into the node. Choosing `None` or pressing **Remove all** removes every LoRA from the node. **Delete preset** removes the selected preset. Saving with an existing name overwrites it.
 
 ### Model Names (`HaoVA | Model`)
 

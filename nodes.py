@@ -108,14 +108,14 @@ class ImageSaveWithMetadata:
                 "filename_prefix": ("STRING", {"default": "test"}),
             },
             "optional": {
-                "positive": ("STRING", {"default": "", "multiline": True}),
-                "negative": ("STRING", {"default": "", "multiline": True}),
-                "model_path": ("STRING", {"default": "", "multiline": True}),
-                "seed_value": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                "steps": ("INT", {"default": 20, "min": 1, "max": 10000}),
-                "sampler_name": (comfy.samplers.KSampler.SAMPLERS,),
-                "scheduler": (comfy.samplers.KSampler.SCHEDULERS,),
-                "cfg": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 100.0, "step": 0.1}),
+                "positive": ("STRING", {"forceInput": True}),
+                "negative": ("STRING", {"forceInput": True}),
+                "model_path": ("STRING", {"forceInput": True}),
+                "seed_value": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "forceInput": True}),
+                "steps": ("INT", {"default": 20, "min": 1, "max": 10000, "forceInput": True}),
+                "sampler_name": (comfy.samplers.KSampler.SAMPLERS, {"forceInput": True}),
+                "scheduler": (comfy.samplers.KSampler.SCHEDULERS, {"forceInput": True}),
+                "cfg": ("FLOAT", {"default": 8.0, "min": 0.0, "max": 100.0, "step": 0.1, "forceInput": True}),
             },
             "hidden": {
                 "prompt": "PROMPT",
@@ -132,14 +132,14 @@ class ImageSaveWithMetadata:
         self,
         images,
         filename_prefix="test",
-        positive="",
-        negative="",
-        model_path="",
-        seed_value=0,
-        steps=20,
-        sampler_name="euler",
-        scheduler="normal",
-        cfg=8.0,
+        positive=None,
+        negative=None,
+        model_path=None,
+        seed_value=None,
+        steps=None,
+        sampler_name=None,
+        scheduler=None,
+        cfg=None,
         prompt=None,
         extra_pnginfo=None,
     ):
@@ -150,25 +150,41 @@ class ImageSaveWithMetadata:
         width = images[0].shape[1]
         height = images[0].shape[0]
         models = []
-        for line in model_path.splitlines():
+        for line in (model_path or "").splitlines():
             if line.strip():
                 path, weight = parse_model_line(line)
                 models.append((os.path.splitext(os.path.basename(path))[0], load_model_info(path), weight))
-        modelhash = models[0][1]["sha256"][:10] if models else "unknown"
-        basemodelname = models[0][0] if models else "unknown"
         hashes = {f"LORA:{name}": info["sha256"][:12].upper() for name, info, _ in models[1:]}
         resources = [{**info["civitai"], **({"weight": weight} if index else {})} for index, (_, info, weight) in enumerate(models) if info.get("civitai")]
 
-        comment = (
-            f"{handle_whitespace(positive)}\n"
-            f"Negative prompt: {handle_whitespace(negative)}\n"
-            f"Steps: {steps}, Sampler: {CIVITAI_SAMPLERS.get(sampler_name, sampler_name)}{' Karras' if scheduler == 'karras' else ''}, "
-            f"{f'Schedule type: {scheduler}, ' if scheduler not in ('normal', 'karras') else ''}"
-            f"CFG scale: {cfg}, Seed: {seed_value}, Size: {width}x{height}, "
-            f"Model hash: {modelhash}, Model: {basemodelname}, "
-            f"{f'Hashes: {json.dumps(hashes, separators=(",", ":"))}, ' if hashes else ''}"
-            f"{f'Civitai resources: {json.dumps(resources, separators=(",", ":"))}, ' if resources else ''}Version: ComfyUI"
-        )
+        settings = []
+        if steps is not None:
+            settings.append(f"Steps: {steps}")
+        if sampler_name:
+            settings.append(f"Sampler: {CIVITAI_SAMPLERS.get(sampler_name, sampler_name)}{' Karras' if scheduler == 'karras' else ''}")
+        if scheduler and scheduler not in ("normal", "karras"):
+            settings.append(f"Schedule type: {scheduler}")
+        if cfg is not None:
+            settings.append(f"CFG scale: {cfg}")
+        if seed_value is not None:
+            settings.append(f"Seed: {seed_value}")
+        settings.append(f"Size: {width}x{height}")
+        if models:
+            settings.append(f"Model hash: {models[0][1]['sha256'][:10]}")
+            settings.append(f"Model: {models[0][0]}")
+        if hashes:
+            settings.append(f"Hashes: {json.dumps(hashes, separators=(',', ':'))}")
+        if resources:
+            settings.append(f"Civitai resources: {json.dumps(resources, separators=(',', ':'))}")
+        settings.append("Version: ComfyUI")
+
+        lines = []
+        if positive:
+            lines.append(handle_whitespace(positive))
+        if negative:
+            lines.append(f"Negative prompt: {handle_whitespace(negative)}")
+        lines.append(", ".join(settings))
+        comment = "\n".join(lines)
 
         for batch_number, image in enumerate(images):
             i = 255. * image.cpu().numpy()
@@ -282,10 +298,18 @@ class GetPath:
             for name, directory in self.FILE_INPUT_DIRECTORIES.items():
                 if isinstance(inputs.get(name), str):
                     weight = inputs.get("strength_model") if name == "lora_name" else None
+                    if weight == 0:
+                        continue
                     paths.append(f"{directory}/{inputs[name]}" + (f":{weight}" if isinstance(weight, (int, float)) else ""))
+            if prompt[node_id]["class_type"] == "Load LoRAs":
+                paths.extend(f"loras/{lora['name']}:{lora['strength']}" for lora in selected_loras(inputs["loras"], inputs["preset"], inputs["presets"]) if lora["name"] != "None" and lora["strength"] != 0)
 
         walk(prompt[unique_id]["inputs"]["model"][0])
         return ("\n".join(paths),)
+
+
+def escape_markdown(text):
+    return re.sub(r"([\\|\[\]])", r"\\\1", text)
 
 
 class ModelInfo:
@@ -293,7 +317,7 @@ class ModelInfo:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "model_path": ("STRING", {"default": "", "multiline": True}),
+                "model_path": ("STRING", {"forceInput": True}),
             },
         }
 
@@ -311,9 +335,9 @@ class ModelInfo:
                     continue
                 civitai = load_model_info(path).get("civitai")
                 if civitai:
-                    rows.append(f"| [{civitai['modelName']}](https://civitai.com/model-versions/{civitai['modelVersionId']}) | {civitai['type']} | {weight if civitai['type'] == 'lora' else ''} |")
+                    rows.append(f"| [{escape_markdown(civitai['modelName'])}](https://civitai.com/model-versions/{civitai['modelVersionId']}) | {escape_markdown(civitai['type'])} | {weight if civitai['type'] == 'lora' else ''} |")
                 else:
-                    rows.append(f"| {os.path.basename(path)} | not found | |")
+                    rows.append(f"| {escape_markdown(os.path.basename(path))} | not found | |")
 
         return ("\n".join(rows),)
 
@@ -498,11 +522,43 @@ class RandomPrompt:
         return (re.sub(r"\{([A-Z]+)\d+\}", fill, template),)
 
 
+def selected_loras(loras, preset, presets):
+    presets = json.loads(presets)
+    return presets[preset] if preset in presets else json.loads(loras)
+
+
+class LoadLoras:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {"loras": ("STRING", {"default": "[]"}), "preset": (["None"],), "presets": ("STRING", {"default": "{}"})}, "optional": {"model": ("MODEL",), "clip": ("CLIP",)}}
+
+    @classmethod
+    def VALIDATE_INPUTS(cls, preset):
+        return True
+
+    RETURN_TYPES = ("MODEL", "CLIP", "STRING", "STRING")
+    RETURN_NAMES = ("model", "clip", "trigger_words", "preset_name")
+    FUNCTION = "load_loras"
+    CATEGORY = "HaoVA | Model"
+
+    def load_loras(self, loras, preset, presets, model=None, clip=None):
+        loader = comfy_nodes.LoraLoader()
+        trigger_words = []
+        for lora in selected_loras(loras, preset, presets):
+            if lora["name"] != "None":
+                model, clip = loader.load_lora(model, clip, lora["name"], lora["strength"], lora["strength"])
+                if lora["trigger_words"].strip():
+                    trigger_words.append(lora["trigger_words"].strip())
+
+        return (model, clip, ", ".join(trigger_words), "" if preset == "None" else preset)
+
+
 NODE_CLASS_MAPPINGS = {
     "Save Image with Metadata": ImageSaveWithMetadata,
     "Model Names": ModelNames,
     "Get Path": GetPath,
     "Model Info": ModelInfo,
+    "Load LoRAs": LoadLoras,
     "Load Image Metadata": LoadImageMetadata,
     "Image Info": ImageInfo,
     "Sampler Select": SamplerSelect,
