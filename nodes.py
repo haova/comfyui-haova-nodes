@@ -2,7 +2,6 @@ import os
 import re
 import json
 import logging
-import random
 import numpy as np
 import hashlib
 import urllib.error
@@ -486,42 +485,6 @@ class ImageInfo:
         return ("\n\n".join(parts),)
 
 
-class RandomPrompt:
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
-                "max_number": ("INT", {"default": 10, "min": 1}),
-            },
-        }
-
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("prompt",)
-    FUNCTION = "pick"
-    CATEGORY = "HaoVA | Text"
-
-    def pick(self, seed, max_number):
-        data_directory = os.path.join(os.path.dirname(__file__), "data")
-        with open(os.path.join(data_directory, "words.json"), encoding="utf-8") as f:
-            words = json.load(f)
-        with open(os.path.join(data_directory, "templates.txt"), encoding="utf-8") as f:
-            entries = [line.rstrip("\n").split("\t", 1) for line in f]
-        entries = [(int(count), template) for count, template in entries if all(tag == "NUM" or tag in words for tag in re.findall(r"\{([A-Z]+)\d+\}", template))]
-        rng = random.Random(seed)
-        template = rng.choices([template for _, template in entries], weights=[count for count, _ in entries])[0]
-
-        numbers = range(1, max_number + 1)
-        number_weights = [1 / number for number in numbers]
-
-        def fill(match):
-            if match.group(1) == "NUM":
-                return str(rng.choices(numbers, weights=number_weights)[0])
-            return rng.choice(words[match.group(1)])
-
-        return (re.sub(r"\{([A-Z]+)\d+\}", fill, template),)
-
-
 def selected_loras(loras, preset, presets):
     presets = json.loads(presets)
     return presets[preset] if preset in presets else json.loads(loras)
@@ -563,5 +526,4 @@ NODE_CLASS_MAPPINGS = {
     "Image Info": ImageInfo,
     "Sampler Select": SamplerSelect,
     "Scheduler Select": SchedulerSelect,
-    "Random Prompt": RandomPrompt,
 }

@@ -51,12 +51,3 @@ Reads the `parameters` metadata of an image and outputs the positive and negativ
 ### Image Info (`HaoVA | Image`)
 
 Reads the `parameters` metadata of an image and outputs it as markdown: prompt, negative prompt, a settings table, the hashes, and the Civitai resources as links. Works with images saved by **Save Image with Metadata** and other A1111-style PNGs.
-
-### Random Prompt (`HaoVA | Text`)
-
-Builds a random prompt from `data/templates.txt`, picking a template weighted by how often it occurs and filling every slot with a random word from `data/words.json`. A `{NUM}` slot gets a number from 1 to `max_number`, where smaller numbers are more likely (weight 1/n). The same `seed` always gives the same prompt.
-
-## Credits
-
-- `data/templates.txt` is derived from the [UD English-EWT](https://github.com/UniversalDependencies/UD_English-EWT) treebank (Silveira et al., 2014), licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-- `data/words.json` is derived from [Open English WordNet](https://en-word.net/) 2025, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), which is based on WordNet 3.1, Copyright 2011 Princeton University.
