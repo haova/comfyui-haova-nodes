@@ -405,12 +405,7 @@ def parse_settings(line):
     return settings
 
 
-def read_parameters(image):
-    with Image.open(folder_paths.get_annotated_filepath(image)) as img:
-        parameters = img.info.get("parameters")
-    if parameters is None:
-        raise ValueError(f"{image} has no 'parameters' metadata")
-
+def parse_parameters(parameters):
     lines = parameters.split("\n")
     settings_index = max(i for i, line in enumerate(lines) if line.startswith("Steps: "))
     text = "\n".join(lines[:settings_index])
@@ -419,6 +414,15 @@ def read_parameters(image):
         positive, negative = "", positive[len("Negative prompt: "):]
 
     return positive, negative, parse_settings(lines[settings_index])
+
+
+def read_parameters(path):
+    with Image.open(path) as img:
+        parameters = img.info.get("parameters")
+    if parameters is None:
+        raise ValueError(f"{path} has no 'parameters' metadata")
+
+    return parse_parameters(parameters)
 
 
 class LoadImageMetadata:
@@ -440,7 +444,7 @@ class LoadImageMetadata:
         return os.path.getmtime(folder_paths.get_annotated_filepath(image))
 
     def load_metadata(self, image):
-        positive, negative, settings = read_parameters(image)
+        positive, negative, settings = read_parameters(folder_paths.get_annotated_filepath(image))
         sampler_name = settings.get("Sampler", "Euler")
         scheduler = settings.get("Schedule type", "normal").lower()
         if sampler_name.endswith(" Karras"):
@@ -457,6 +461,9 @@ class ImageInfo:
             "required": {
                 "image": (list_input_images(), {"image_upload": True}),
             },
+            "optional": {
+                "path": ("STRING", {"forceInput": True}),
+            },
         }
 
     RETURN_TYPES = ("STRING",)
@@ -465,11 +472,11 @@ class ImageInfo:
     CATEGORY = "HaoVA | Image"
 
     @classmethod
-    def IS_CHANGED(cls, image):
-        return os.path.getmtime(folder_paths.get_annotated_filepath(image))
+    def IS_CHANGED(cls, image, path=None):
+        return os.path.getmtime(path or folder_paths.get_annotated_filepath(image))
 
-    def get_info(self, image):
-        positive, negative, settings = read_parameters(image)
+    def get_info(self, image, path=None):
+        positive, negative, settings = read_parameters(path or folder_paths.get_annotated_filepath(image))
         resources = settings.pop("Civitai resources", [])
         hashes = settings.pop("Hashes", {})
         rows = ["| Setting | Value |", "|---|---|"]
