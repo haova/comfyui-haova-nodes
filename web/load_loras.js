@@ -76,13 +76,13 @@ app.registerExtension({
 
         presetWidget.callback = load;
 
-        const saveButton = node.addWidget("button", "Save preset", null, (value, canvas, node, pos, event) => {
-            canvas.prompt("Preset name", "", (name) => {
-                presets()[name] = entries();
-                refreshPresets();
-                presetWidget.value = name;
-                showDelete();
-            }, event);
+        const saveButton = node.addWidget("button", "Save preset", null, () => {
+            const name = window.prompt("Preset name", presetWidget.value === "None" ? "" : presetWidget.value);
+            if (!name) return;
+            presets()[name] = entries();
+            refreshPresets();
+            presetWidget.value = name;
+            showDelete();
         });
 
         const deleteButton = node.addWidget("button", "Delete preset", null, () => {
