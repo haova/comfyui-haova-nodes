@@ -301,7 +301,7 @@ class GetPath:
                         continue
                     paths.append(f"{directory}/{inputs[name]}" + (f":{weight}" if isinstance(weight, (int, float)) else ""))
             if prompt[node_id]["class_type"] == "Load LoRAs":
-                paths.extend(f"loras/{lora['name']}:{lora['strength']}" for lora in selected_loras(inputs["loras"], inputs["preset"], inputs["presets"]) if lora["name"] != "None" and lora["strength"] != 0)
+                paths.extend(f"loras/{lora['name']}:{lora['strength']}" for lora in selected_loras(inputs["loras"], self.resolve(prompt, inputs["preset"]), inputs["presets"]) if lora["name"] != "None" and lora["strength"] != 0)
 
         walk(prompt[unique_id]["inputs"]["model"][0])
         return ("\n".join(paths),)
@@ -494,7 +494,7 @@ class ImageInfo:
 
 def selected_loras(loras, preset, presets):
     presets = json.loads(presets)
-    return presets[preset] if preset in presets else json.loads(loras)
+    return [lora for lora in (presets[preset] if preset in presets else json.loads(loras)) if lora.get("enabled", True)]
 
 
 class LoadLoras:
