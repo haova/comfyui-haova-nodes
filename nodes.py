@@ -3,14 +3,16 @@ import re
 import json
 import logging
 import numpy as np
+import torch
 import hashlib
 import urllib.error
 import urllib.request
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from PIL.PngImagePlugin import PngInfo
 import comfy.samplers
 import nodes as comfy_nodes
 import folder_paths
+from comfy_api.latest import io
 
 def load_model_info(file_path):
     stat = os.stat(file_path)
@@ -523,6 +525,63 @@ class LoadLoras:
         return (model, clip, ", ".join(trigger_words), "" if preset == "None" else preset)
 
 
+class CaptionedImages(io.ComfyNode):
+    @classmethod
+    def define_schema(cls):
+        return io.Schema(
+            node_id="Captioned Images",
+            category="HaoVA | Image",
+            inputs=[
+                io.Autogrow.Input("images", template=io.Autogrow.TemplatePrefix(io.Image.Input("image"), prefix="image_", min=2, max=32)),
+                io.String.Input("captions", multiline=True, default=""),
+                io.Int.Input("font_size", default=32, min=8, max=256),
+                io.Int.Input("gap", default=16, min=0, max=512),
+            ],
+            outputs=[io.Image.Output(display_name="image")],
+        )
+
+    @staticmethod
+    def wrap(draw, text, font, width):
+        line = ""
+        lines = []
+        for word in text.split(" "):
+            candidate = f"{line} {word}" if line else word
+            if line and draw.textlength(candidate, font=font) > width:
+                lines.append(line)
+                line = word
+            else:
+                line = candidate
+        lines.append(line)
+        return lines
+
+    @classmethod
+    def execute(cls, images, captions, font_size, gap):
+        images = [images[name] for name in sorted(images, key=lambda name: int(name.rsplit("_", 1)[-1])) if images[name] is not None]
+        images = [Image.fromarray(np.clip(255.0 * image[0].cpu().numpy(), 0, 255).astype(np.uint8)).convert("RGB") for image in images]
+        height = images[0].height
+        images = [image.resize((max(1, round(image.width * height / image.height)), height), Image.LANCZOS) for image in images]
+        texts = captions.split("\n")
+        texts += [""] * (len(images) - len(texts))
+
+        font = ImageFont.load_default(font_size)
+        draw = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+        line_height = round(font_size * 1.3)
+        lines = [cls.wrap(draw, text, font, image.width - 16) for text, image in zip(texts, images)]
+        caption_height = max(len(image_lines) for image_lines in lines) * line_height + 16
+
+        width = sum(image.width for image in images) + gap * (len(images) + 1)
+        canvas = Image.new("RGB", (width, gap + height + caption_height + gap), "black")
+        draw = ImageDraw.Draw(canvas)
+        x = gap
+        for image, image_lines in zip(images, lines):
+            canvas.paste(image, (x, gap))
+            for i, line in enumerate(image_lines):
+                draw.text((x + image.width / 2, gap + height + 8 + i * line_height), line, fill="white", font=font, anchor="ma")
+            x += image.width + gap
+
+        return io.NodeOutput(torch.from_numpy(np.array(canvas).astype(np.float32) / 255.0).unsqueeze(0))
+
+
 NODE_CLASS_MAPPINGS = {
     "Save Image with Metadata": ImageSaveWithMetadata,
     "Model Names": ModelNames,
@@ -531,6 +590,7 @@ NODE_CLASS_MAPPINGS = {
     "Load LoRAs": LoadLoras,
     "Load Image Metadata": LoadImageMetadata,
     "Image Info": ImageInfo,
+    "Captioned Images": CaptionedImages,
     "Sampler Select": SamplerSelect,
     "Scheduler Select": SchedulerSelect,
 }

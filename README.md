@@ -51,3 +51,7 @@ Reads the `parameters` metadata of an image and outputs the positive and negativ
 ### Image Info (`HaoVA | Image`)
 
 Reads the `parameters` metadata of an image and outputs it as markdown: prompt, negative prompt, a settings table, the hashes, and the Civitai resources as links. Works with images saved by **Save Image with Metadata** and other A1111-style PNGs.
+
+### Captioned Images (`HaoVA | Image`)
+
+Joins every connected image side by side into one image (each is scaled to the height of the first) and writes a white caption on a black background centered below each one. A new `image` input appears whenever the last one is connected. Type the captions in `captions`, one line per image in order. `font_size` sets the caption size and `gap` the black space between images and around the border. Only the first image of each batch is used.
